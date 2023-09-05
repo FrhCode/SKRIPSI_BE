@@ -2,8 +2,6 @@ package com.farhan.skripsibe.repository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -49,8 +47,8 @@ public class DieseRepositoryTest {
 						"Isolasi dan Karantina",
 						"Segera setelah Anda melihat gejala Pseudomonas hydrophila pada ikan, pisahkan ikan tersebut dari penghuni kolam lainnya untuk mencegah penyebaran penyakit. Tempatkan ikan yang terinfeksi ke dalam tangki karantina dengan air bersih.",
 						P1));
-		List<Solution> solutions = solutionRepository.findAll();
-		System.out.println("OK");
+		// List<Solution> solutions = solutionRepository.findAll();
+		// System.out.println("OK");
 	}
 
 	@Test

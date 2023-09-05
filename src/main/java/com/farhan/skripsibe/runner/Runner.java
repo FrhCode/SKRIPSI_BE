@@ -1,18 +1,15 @@
 package com.farhan.skripsibe.runner;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import com.farhan.skripsibe.model.Consultation;
@@ -24,9 +21,7 @@ import com.farhan.skripsibe.model.User;
 import com.farhan.skripsibe.model.json.DieseJson;
 import com.farhan.skripsibe.model.json.SolutionJson;
 import com.farhan.skripsibe.model.json.SymtomJson;
-import com.farhan.skripsibe.repository.ConsultationRepository;
 import com.farhan.skripsibe.repository.DieseRepository;
-import com.farhan.skripsibe.repository.RoleRepository;
 import com.farhan.skripsibe.repository.SolutionRepository;
 import com.farhan.skripsibe.repository.SymtomRepository;
 import com.farhan.skripsibe.repository.UserRepository;

@@ -1,7 +1,6 @@
 package com.farhan.skripsibe.repository;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

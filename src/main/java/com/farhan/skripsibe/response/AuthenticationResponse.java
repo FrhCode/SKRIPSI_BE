@@ -5,7 +5,6 @@ import java.util.List;
 import com.farhan.skripsibe.model.Role;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
