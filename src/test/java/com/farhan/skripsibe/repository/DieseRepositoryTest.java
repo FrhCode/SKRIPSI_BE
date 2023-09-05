@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.support.TransactionTemplate;
 
 import com.farhan.skripsibe.SkripsiBeApplication;
 import com.farhan.skripsibe.model.Diese;
@@ -20,8 +19,8 @@ public class DieseRepositoryTest {
 	private DieseRepository dieseRepository;
 	@Autowired
 	private SolutionRepository solutionRepository;
+
 	@Autowired
-	private TransactionTemplate transactionTemplate;
 
 	@Test
 	public void findByCode() {

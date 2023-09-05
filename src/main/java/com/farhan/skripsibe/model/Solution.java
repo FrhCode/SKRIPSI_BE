@@ -1,5 +1,7 @@
 package com.farhan.skripsibe.model;
 
+import java.util.ArrayList;
+
 import jakarta.persistence.*;
 import lombok.*;
 

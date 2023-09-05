@@ -10,21 +10,26 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import com.farhan.skripsibe.model.Consultation;
 import com.farhan.skripsibe.model.Diese;
+import com.farhan.skripsibe.model.Role;
 import com.farhan.skripsibe.model.Solution;
 import com.farhan.skripsibe.model.Symptom;
+import com.farhan.skripsibe.model.User;
 import com.farhan.skripsibe.model.json.DieseJson;
 import com.farhan.skripsibe.model.json.SolutionJson;
 import com.farhan.skripsibe.model.json.SymtomJson;
 import com.farhan.skripsibe.repository.ConsultationRepository;
 import com.farhan.skripsibe.repository.DieseRepository;
+import com.farhan.skripsibe.repository.RoleRepository;
 import com.farhan.skripsibe.repository.SolutionRepository;
 import com.farhan.skripsibe.repository.SymtomRepository;
+import com.farhan.skripsibe.repository.UserRepository;
 import com.farhan.skripsibe.service.ConsultationService;
 
 import lombok.RequiredArgsConstructor;
@@ -36,6 +41,8 @@ public class Runner implements CommandLineRunner {
 	private final SymtomRepository symtomRepository;
 	private final SolutionRepository solutionRepository;
 	private final ConsultationService consultationService;
+	private final UserRepository userRepository;
+	private final PasswordEncoder passwordEncoder;
 
 	private final TransactionTemplate transactionTemplate;
 	private List<Symptom> symtoms = new ArrayList<>();
@@ -51,6 +58,16 @@ public class Runner implements CommandLineRunner {
 		generateSolution();
 
 		generateConsultation();
+
+		Role adminRole = Role.builder().name("Admin").build();
+
+		User user = new User(null, "farhan", "farhan7534031b@gmail.com", "082188513499",
+				passwordEncoder.encode("indonesia123B"));
+
+		user.addRole(adminRole);
+
+		userRepository.save(user);
+
 	}
 
 	private void generateConsultation() {

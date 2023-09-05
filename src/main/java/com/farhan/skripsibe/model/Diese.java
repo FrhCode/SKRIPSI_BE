@@ -3,6 +3,8 @@ package com.farhan.skripsibe.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -28,10 +30,12 @@ public class Diese {
 	@JoinTable(joinColumns = { @JoinColumn(name = "id_penyakit") }, inverseJoinColumns = {
 			@JoinColumn(name = "id_gejala") }, name = "rule_base")
 	@Setter(AccessLevel.NONE)
+	@JsonIgnore
 	private final List<Symptom> symptoms = new ArrayList<>();
 
 	@OneToMany(cascade = { CascadeType.REMOVE }, mappedBy = "diese")
 	@Setter(AccessLevel.NONE)
+	@JsonIgnore
 	private final List<Solution> solutions = new ArrayList<>();
 
 	// public void addSolution(Solution solution) {

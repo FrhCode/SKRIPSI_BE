@@ -4,13 +4,16 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.*;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-// @Builder
+@EqualsAndHashCode(exclude = { "dieses" })
+@ToString(exclude = { "dieses" })
 @Entity
 @Table(name = "gejala")
 public class Symptom {
@@ -29,6 +32,7 @@ public class Symptom {
 
 	@ManyToMany(mappedBy = "symptoms", cascade = {})
 	@Setter(AccessLevel.NONE)
+	@JsonIgnore
 	private final List<Diese> dieses = new ArrayList<>();
 
 }
