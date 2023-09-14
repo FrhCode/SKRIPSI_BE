@@ -2,22 +2,23 @@ version: "3"
 
 services:
   db:
-    image: mysql:8
+    image: mysql:5.7
     ports:
       - "3309:3306"
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: asdd
       MYSQL_DATABASE: si_lele
-      MYSQL_PASSWORD: asdd
 
-  phpmyadmin:
-    depends_on:
-      - db
-    image: phpmyadmin
-    restart: always
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
-      - "8090:80"
-    environment:
-      PMA_HOST: db
-      MYSQL_ROOT_PASSWORD: asdd
+      - "3003:8080"
+    command: bash -c
+      "
+      chmod 777 start.sh &&
+      dos2unix start.sh  &&
+      ./start.sh
+      "  
