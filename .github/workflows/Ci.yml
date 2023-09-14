@@ -20,3 +20,4 @@ jobs:
             docker rm -f skripsi-be
             docker build -t skripsi-be:latest .
             docker run -d --name skripsi-be -p 3003:8080 skripsi-be:latest
+            docker images | grep '<none>' | awk '{print $3}' | xargs docker rmi -f
