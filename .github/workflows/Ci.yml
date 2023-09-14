@@ -17,6 +17,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           script: |
             cd /var/www/api.pakar.farhandev.cloud
+            git pull origin main
             docker rm -f skripsi-be
             docker build -t skripsi-be:latest .
             docker run -d --name skripsi-be -p 3003:8080 skripsi-be:latest
