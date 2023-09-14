@@ -19,5 +19,5 @@ jobs:
             cd /var/www/api.pakar.farhandev.cloud
             docker rm -f skripsi-be
             docker build -t skripsi-be .
-            docker run -d --name spring -p 3003:8080 skripsi-be
+            docker run -d --name skripsi-be -p 3003:8080 skripsi-be
             docker images | grep '<none>' | awk '{print $3}' | xargs docker rmi
