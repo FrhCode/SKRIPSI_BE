@@ -54,6 +54,11 @@ public class Runner implements CommandLineRunner {
 
 		generateConsultation();
 
+		generateUser();
+
+	}
+
+	private void generateUser() {
 		Role adminRole = Role.builder().name("Admin").build();
 
 		User user = new User(null, "farhan", "farhan7534031b@gmail.com", "082188513499",
@@ -62,7 +67,6 @@ public class Runner implements CommandLineRunner {
 		user.addRole(adminRole);
 
 		userRepository.save(user);
-
 	}
 
 	private void generateConsultation() {
@@ -75,7 +79,7 @@ public class Runner implements CommandLineRunner {
 		};
 
 		List<DieseJson> dieses = dieseRepository.findAll().stream()
-				.filter(diese -> Math.random() > 0.3)
+				.filter(diese -> Math.random() > 0.8)
 				.map(diese -> {
 					List<SolutionJson> solutions = solutionRepository.findByDieseId(diese.getId()).stream()
 							.map(solution -> new SolutionJson(solution.getName(), solution.getDescription()))
@@ -89,7 +93,7 @@ public class Runner implements CommandLineRunner {
 					return dieseJson;
 				}).sorted(soryDiesesByPercentage).collect(Collectors.toList());
 
-		List<SymtomJson> symtoms = symtomRepository.findAll().stream().filter(symtom -> Math.random() > 0.3).map(symtom -> {
+		List<SymtomJson> symtoms = symtomRepository.findAll().stream().filter(symtom -> Math.random() > 0.7).map(symtom -> {
 			return new SymtomJson(symtom.getName(), symtom.getDsValue());
 		}).collect(Collectors.toList());
 

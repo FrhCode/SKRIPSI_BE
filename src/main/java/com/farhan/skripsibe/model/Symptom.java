@@ -21,7 +21,7 @@ public class Symptom {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "kode", nullable = false)
+	@Column(name = "kode", nullable = false, unique = true)
 	private String code;
 
 	@Column(name = "nama", nullable = false)

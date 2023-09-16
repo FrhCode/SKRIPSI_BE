@@ -16,7 +16,6 @@ import lombok.*;
 @NoArgsConstructor
 @EqualsAndHashCode(exclude = {})
 @ToString(exclude = {})
-// @Builder
 @Entity
 @Table(name = "konsultasi")
 public class Consultation {
@@ -24,7 +23,7 @@ public class Consultation {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "kode invoice", nullable = false)
+	@Column(name = "kode invoice", nullable = false, unique = true)
 	private String invoice;
 
 	@Column(name = "nama pasien", nullable = false)

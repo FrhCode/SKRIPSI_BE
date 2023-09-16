@@ -17,10 +17,9 @@ import com.farhan.skripsibe.request.TestSymtomSearchRequest;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("api/v1/symptom")
+@RequestMapping("api/v1/symptoms")
 @RequiredArgsConstructor
 public class SymtomController {
-	private final SymtomJpqlRepository symtomJpqlRepository;
 	private final SymtomCriteriaRepository symtomCriteriaRepository;
 
 	@GetMapping("all")

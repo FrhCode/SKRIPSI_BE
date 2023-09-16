@@ -8,4 +8,6 @@ import com.farhan.skripsibe.model.Consultation;
 
 public interface ConsultationRepository extends JpaRepository<Consultation, Long> {
 	long countByInvoiceDateIsAfter(LocalDateTime startOfToday);
+
+	Consultation findByinvoice(String invoice);
 }
