@@ -23,7 +23,7 @@ public class SecurityConfiguration {
 		http.csrf(crsf -> crsf.disable())
 				.authorizeHttpRequests(authorize -> authorize
 						.requestMatchers("/api/v1/auth/**").permitAll()
-						.requestMatchers("GET", "/api/v1/symptom/all").permitAll()
+						.requestMatchers("GET", "/api/v1/symptoms/all").permitAll()
 						.anyRequest().authenticated())
 				.sessionManagement(session -> session
 						.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
