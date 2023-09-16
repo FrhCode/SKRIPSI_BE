@@ -94,7 +94,7 @@ public class Runner implements CommandLineRunner {
 				}).sorted(soryDiesesByPercentage).collect(Collectors.toList());
 
 		List<SymtomJson> symtoms = symtomRepository.findAll().stream().filter(symtom -> Math.random() > 0.7).map(symtom -> {
-			return new SymtomJson(symtom.getName(), symtom.getDsValue());
+			return new SymtomJson(symtom.getName(), symtom.getCode(), symtom.getDsValue());
 		}).collect(Collectors.toList());
 
 		consultationService
