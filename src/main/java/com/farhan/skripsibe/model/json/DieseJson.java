@@ -17,6 +17,9 @@ public class DieseJson {
 	@JsonProperty("persentasi")
 	private BigDecimal percentage;
 
+	@JsonProperty("deskripsi")
+	private String description;
+
 	@JsonProperty("solusi")
 	private List<SolutionJson> solutions;
 

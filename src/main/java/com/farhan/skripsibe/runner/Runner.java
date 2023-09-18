@@ -87,6 +87,7 @@ public class Runner implements CommandLineRunner {
 
 					DieseJson dieseJson = new DieseJson();
 					dieseJson.setName(diese.getName());
+					dieseJson.setDescription(diese.getDescription());
 					dieseJson.setPercentage(BigDecimal.valueOf(Math.random()));
 					dieseJson.setSolutions(solutions);
 

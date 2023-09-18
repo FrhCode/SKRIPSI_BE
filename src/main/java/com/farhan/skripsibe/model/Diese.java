@@ -27,7 +27,7 @@ public class Diese {
 	@Column(name = "nama", nullable = false)
 	private String name;
 
-	@Column(name = "deskripsi", nullable = false)
+	@Column(name = "deskripsi", nullable = false, columnDefinition = "TEXT")
 	private String description;
 
 	@ManyToMany(cascade = { CascadeType.PERSIST })
