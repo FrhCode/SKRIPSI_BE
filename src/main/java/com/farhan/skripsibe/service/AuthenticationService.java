@@ -35,7 +35,7 @@ public class AuthenticationService {
 		user.addRole(role);
 
 		String jwtToken = jwtService.generateToken(user);
-		return new AuthenticationResponse(user.getUsername(), user.getEmail(), user.getRoles(), jwtToken);
+		return new AuthenticationResponse(user, jwtToken);
 	}
 
 	public AuthenticationResponse authenticate(LoginRequest request) {
@@ -47,7 +47,7 @@ public class AuthenticationService {
 
 		String jwtToken = jwtService.generateToken(user);
 
-		return new AuthenticationResponse(user.getUsername(), user.getEmail(), user.getRoles(), jwtToken);
+		return new AuthenticationResponse(user, jwtToken);
 	}
 
 }

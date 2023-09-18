@@ -10,6 +10,8 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -32,6 +34,7 @@ public class User implements UserDetails {
 	private String phoneNumber;
 
 	@Column(nullable = false)
+	@JsonIgnore
 	private String password;
 
 	@ManyToMany(cascade = { CascadeType.PERSIST })
