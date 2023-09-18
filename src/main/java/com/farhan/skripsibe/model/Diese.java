@@ -23,8 +23,12 @@ public class Diese {
 
 	@Column(name = "kode", nullable = false, unique = true)
 	private String code;
+
 	@Column(name = "nama", nullable = false)
 	private String name;
+
+	@Column(name = "deskripsi", nullable = false)
+	private String description;
 
 	@ManyToMany(cascade = { CascadeType.PERSIST })
 	@JoinTable(joinColumns = { @JoinColumn(name = "id_penyakit") }, inverseJoinColumns = {

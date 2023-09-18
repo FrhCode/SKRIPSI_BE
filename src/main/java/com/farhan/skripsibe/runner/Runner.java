@@ -421,8 +421,10 @@ public class Runner implements CommandLineRunner {
 
 	private void generateDieses() {
 		List<Diese> dieses = List.of(
-				new Diese(null, "P1", "Pseudomonas hydrophila"),
-				new Diese(null, "P2", "Aeromonas hydrophila"),
+				new Diese(null, "P1", "Pseudomonas hydrophila",
+						"Penyakit Pseudomonas hydrophila, juga dikenal sebagai penyakit aeromonas atau septicemia hemoragik, adalah penyakit infeksi bakteri yang serius pada ikan air tawar. Penyakit ini disebabkan oleh bakteri Pseudomonas hydrophila atau Aeromonas hydrophila."),
+				new Diese(null, "P2", "Aeromonas hydrophila",
+						"Penyakit Aeromonas hydrophila, juga dikenal sebagai Aeromonas septicemia, adalah infeksi bakteri yang dapat mempengaruhi ikan air tawar dan laut. Aeromonas hydrophila adalah bakteri Gram-negatif yang dapat menyebabkan berbagai gejala pada ikan."),
 				new Diese(null, "P3", "Aeromonas punctata"),
 				new Diese(null, "P4", "Columnaris"),
 				new Diese(null, "P5", "Edwardsiella"),
