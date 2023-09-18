@@ -425,15 +425,24 @@ public class Runner implements CommandLineRunner {
 						"Penyakit Pseudomonas hydrophila, juga dikenal sebagai penyakit aeromonas atau septicemia hemoragik, adalah penyakit infeksi bakteri yang serius pada ikan air tawar. Penyakit ini disebabkan oleh bakteri Pseudomonas hydrophila atau Aeromonas hydrophila."),
 				new Diese(null, "P2", "Aeromonas hydrophila",
 						"Penyakit Aeromonas hydrophila, juga dikenal sebagai Aeromonas septicemia, adalah infeksi bakteri yang dapat mempengaruhi ikan air tawar dan laut. Aeromonas hydrophila adalah bakteri Gram-negatif yang dapat menyebabkan berbagai gejala pada ikan."),
-				new Diese(null, "P3", "Aeromonas punctata"),
-				new Diese(null, "P4", "Columnaris"),
-				new Diese(null, "P5", "Edwardsiella"),
-				new Diese(null, "P6", "Tuberculosis"),
-				new Diese(null, "P7", "Jamur putih"),
-				new Diese(null, "P8", "Bintik putih (White spot)"),
-				new Diese(null, "P9", "Gatal"),
-				new Diese(null, "P10", "Trematoda"),
-				new Diese(null, "P11", "Lernaea sp"));
+				new Diese(null, "P3", "Aeromonas punctata",
+						"Aeromonas punctata adalah salah satu spesies bakteri dari genus Aeromonas. Bakteri ini dapat dengan cepat menjalar dan dapat menyebabkan kematian mendadak dengan kemungkinan yang tinggi."),
+				new Diese(null, "P4", "Columnaris",
+						"Columnaris adalah infeksi bakteri pada ikan yang mempengaruhi kulit, insang, dan sirip. penyakit ini dapat menyebar dengan cepat dan dapat menyebabkan kematian mendadak dengan kemungkinan yang tinggi."),
+				new Diese(null, "P5", "Edwardsiella",
+						"Edwardsiella adalah bakteri yang bisa ditemukan di air tawar, air limbah, dan hewan. Bakteri ini dapat menyebabkan infeksi pada ikan dan hewan lainnya seperti reptil, amfibi, dan mamalia."),
+				new Diese(null, "P6", "Tuberculosis",
+						"Penyakit tuberkulosis pada ikan disebabkan oleh bakteri Mycobacterium spp., terutama Mycobacterium marinum dan Mycobacterium fortuitum. Penyakit ini sering disebut sebagai 'fish tuberculosis' atau 'fish TB'. Tuberkulosis pada ikan dapat menyerang berbagai jenis ikan air tawar dan air laut."),
+				new Diese(null, "P7", "Jamur putih",
+						"Penyakit jamur putih pada ikan, juga dikenal sebagai saprolegniasis, disebabkan oleh jamur dari genus Saproglena atau Achyla. Jamur ini merupakan organisme eukariotik bersel tunggal yang dapat menginfeksi ikan dan organisme air lainnya. Saprolegniasis biasanya muncul pada ikan yang mengalami luka atau stres, dan jamur tersebut memanfaatkan situasi tersebut untuk menyerang jaringan ikan."),
+				new Diese(null, "P8", "Bintik putih (White spot)",
+						"Bintik putih pada ikan merupakan gejala dari penyakit yang disebut 'Ichthyophthirius multifiliis,' yang lebih dikenal sebagai 'Ikan Putih' atau 'White Spot Disease' dalam bahasa Inggris. Ini adalah salah satu penyakit ikan air tawar paling umum dan dapat sangat merugikan bagi populasi ikan dalam akuarium atau kolam."),
+				new Diese(null, "P9", "Gatal",
+						"Penyakit gatal pada ikan adalah kondisi medis di mana ikan mengalami iritasi atau ketidaknyamanan pada kulit atau selaput lendirnya. Hal ini dapat disebabkan oleh berbagai faktor, termasuk infeksi bakteri, jamur, protozoa, atau parasit."),
+				new Diese(null, "P10", "Trematoda",
+						"Penyakit Trematoda pada ikan disebabkan oleh cacing pipih parasitik dari kelas Trematoda. Cacing-cacing ini juga dikenal sebagai fluke. Mereka memiliki siklus hidup kompleks yang melibatkan dua atau lebih inang selama fase perkembangan mereka."),
+				new Diese(null, "P11", "Lernaea sp",
+						"Lernaea, juga dikenal sebagai 'cacing benang ikan,' adalah parasit yang dapat mempengaruhi ikan air tawar dan air asin. Parasit ini termasuk dalam kelompok copepod (krustasea mikroskopis) dan umumnya dikenal dengan nama 'anchor worm' karena bentuknya yang menyerupai jangkar."));
 
 		dieseRepository.saveAll(dieses);
 	}
