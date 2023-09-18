@@ -10,13 +10,9 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SymtomJson {
-	@JsonProperty("nama")
 	private String name;
 
-	@JsonProperty("code")
 	private String code;
 
-	@JsonProperty("nilai_ds")
 	private BigDecimal dsValue;
-
 }

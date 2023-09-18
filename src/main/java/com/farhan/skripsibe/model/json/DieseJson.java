@@ -11,16 +11,12 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DieseJson {
-	@JsonProperty("nama")
 	private String name;
 
-	@JsonProperty("persentasi")
 	private BigDecimal percentage;
 
-	@JsonProperty("deskripsi")
 	private String description;
 
-	@JsonProperty("solusi")
 	private List<SolutionJson> solutions;
 
 }

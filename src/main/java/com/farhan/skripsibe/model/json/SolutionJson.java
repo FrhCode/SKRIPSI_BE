@@ -8,8 +8,6 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SolutionJson {
-	@JsonProperty("nama")
 	private String name;
-	@JsonProperty("deskripsi")
 	private String description;
 }
