@@ -34,6 +34,9 @@ public class User implements UserDetails {
 	private String phoneNumber;
 
 	@Column(nullable = false)
+	private String profileImage;
+
+	@Column(nullable = false)
 	@JsonIgnore
 	private String password;
 

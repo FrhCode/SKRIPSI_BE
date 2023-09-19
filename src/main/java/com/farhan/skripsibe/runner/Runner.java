@@ -62,7 +62,7 @@ public class Runner implements CommandLineRunner {
 		Role adminRole = Role.builder().name("Admin").build();
 
 		User user = new User(null, "farhan", "farhan7534031b@gmail.com", "082188513499",
-				passwordEncoder.encode("indonesia123B"));
+				"/images/2024-lamborghini-revuelto-127-641a1d518802b.jpg", passwordEncoder.encode("indonesia123B"));
 
 		user.addRole(adminRole);
 
