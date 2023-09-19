@@ -2,8 +2,6 @@ package com.farhan.skripsibe.model.json;
 
 import java.math.BigDecimal;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import lombok.*;
 
 @Data

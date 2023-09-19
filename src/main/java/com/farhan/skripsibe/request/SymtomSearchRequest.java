@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TestSymtomSearchRequest {
+public class SymtomSearchRequest {
 	private String code;
 	private String name;
 	private BigDecimal dsValue;

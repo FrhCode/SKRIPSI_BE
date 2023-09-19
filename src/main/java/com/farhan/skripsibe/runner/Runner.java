@@ -52,7 +52,9 @@ public class Runner implements CommandLineRunner {
 
 		generateSolution();
 
-		generateConsultation();
+		for (int i = 0; i < 300; i++) {
+			generateConsultation();
+		}
 
 		generateUser();
 

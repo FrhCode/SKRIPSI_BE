@@ -1,6 +1,5 @@
 package com.farhan.skripsibe.repository;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.farhan.skripsibe.model.Symptom;
 import com.farhan.skripsibe.request.SymtomPaginateRequest;
-import com.farhan.skripsibe.request.TestSymtomSearchRequest;
+import com.farhan.skripsibe.request.SymtomSearchRequest;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.criteria.CriteriaBuilder;
@@ -48,7 +47,7 @@ public class SymtomCriteriaRepository {
 		return em.createQuery(cq).getResultList();
 	}
 
-	public List<Symptom> search(TestSymtomSearchRequest request) {
+	public List<Symptom> search(SymtomSearchRequest request) {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Symptom> cq = cb.createQuery(Symptom.class);
 
@@ -99,12 +98,12 @@ public class SymtomCriteriaRepository {
 
 		Pageable pageable = getPageable(request);
 
-		long symtomsCount = getSymtomsCount(request);
+		long symtomsCount = getPaginateCount(request);
 
 		return new PageImpl<>(symtoms, pageable, symtomsCount);
 	}
 
-	private long getSymtomsCount(SymtomPaginateRequest request) {
+	private long getPaginateCount(SymtomPaginateRequest request) {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Long> cq = cb.createQuery(Long.class);
 		Root<Symptom> symtomRoot = cq.from(Symptom.class);
@@ -147,15 +146,6 @@ public class SymtomCriteriaRepository {
 
 			Predicate codeLike = cb.like(symtomRoot.get("code"), "%" + request.getQuery() + "%");
 			predicates.add(codeLike);
-
-			try {
-				BigDecimal dsValue = new BigDecimal(request.getQuery());
-				Predicate dsValueEqual = cb.equal(symtomRoot.get("dsValue"), dsValue);
-				predicates.add(dsValueEqual);
-			} catch (Exception e) {
-
-			}
-
 		}
 
 		return cb.or(predicates.toArray(new Predicate[0]));

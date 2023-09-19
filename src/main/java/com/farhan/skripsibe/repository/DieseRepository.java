@@ -8,4 +8,6 @@ import com.farhan.skripsibe.model.Diese;
 
 public interface DieseRepository extends JpaRepository<Diese, Long> {
 	Optional<Diese> findByCode(String code);
+
+	long count();
 }

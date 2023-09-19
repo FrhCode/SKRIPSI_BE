@@ -10,4 +10,5 @@ import com.farhan.skripsibe.model.Solution;
 public interface SolutionRepository extends JpaRepository<Solution, Long> {
 	@Query("SELECT s from Solution s where s.diese.id = ?1")
 	List<Solution> findByDieseId(Long diese_id);
+
 }

@@ -8,4 +8,6 @@ import com.farhan.skripsibe.model.Symptom;
 
 public interface SymtomRepository extends JpaRepository<Symptom, Long> {
 	Optional<Symptom> findByCode(String code);
+
+	long count();
 }

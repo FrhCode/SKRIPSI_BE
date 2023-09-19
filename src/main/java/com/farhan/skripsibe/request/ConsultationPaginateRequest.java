@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SymtomPaginateRequest {
+public class ConsultationPaginateRequest {
 	private Integer page = 0;
 	private Integer size = 5;
 	private String query = "";
