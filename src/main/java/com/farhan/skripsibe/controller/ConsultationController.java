@@ -1,12 +1,17 @@
 package com.farhan.skripsibe.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.farhan.skripsibe.model.Consultation;
@@ -36,8 +41,15 @@ public class ConsultationController {
 	}
 
 	@GetMapping("all")
-	public GetAllResponse<Consultation> all() {
-		return new GetAllResponse<Consultation>(consultationService.findAll());
+	public GetAllResponse<Consultation> all(@RequestParam(required = false) Optional<Integer> size) {
+		List<Consultation> consultations = new ArrayList<>();
+		if (size.isPresent()) {
+			consultations = consultationService.findAll(PageRequest.of(0, size.get()));
+		} else {
+			consultations = consultationService.findAll();
+		}
+
+		return new GetAllResponse<Consultation>(consultations);
 	}
 
 	@GetMapping

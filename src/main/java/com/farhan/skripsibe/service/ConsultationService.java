@@ -3,6 +3,7 @@ package com.farhan.skripsibe.service;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.farhan.skripsibe.model.Consultation;
@@ -27,6 +28,11 @@ public class ConsultationService {
 
 	public List<Consultation> findAll() {
 		return consultationRepository.findAll();
+	}
+
+	public List<Consultation> findAll(Pageable pageable) {
+		Page<Consultation> page = consultationRepository.findAll(pageable);
+		return page.getContent();
 	}
 
 	public Consultation findByinvoice(String invoiceNumber) {
