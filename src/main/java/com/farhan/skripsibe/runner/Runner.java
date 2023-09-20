@@ -5,10 +5,12 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import com.farhan.skripsibe.model.Consultation;
@@ -20,29 +22,38 @@ import com.farhan.skripsibe.model.User;
 import com.farhan.skripsibe.model.json.DieseJson;
 import com.farhan.skripsibe.model.json.SolutionJson;
 import com.farhan.skripsibe.model.json.SymtomJson;
+import com.farhan.skripsibe.repository.ConsultationRepository;
 import com.farhan.skripsibe.repository.DieseRepository;
 import com.farhan.skripsibe.repository.SolutionRepository;
 import com.farhan.skripsibe.repository.SymtomRepository;
 import com.farhan.skripsibe.repository.UserRepository;
 import com.farhan.skripsibe.service.ConsultationService;
+import com.farhan.skripsibe.service.DateService;
+import com.github.javafaker.Faker;
 
 import lombok.RequiredArgsConstructor;
 
-// @Component
+@Component
 @RequiredArgsConstructor
 public class Runner implements CommandLineRunner {
 	private final DieseRepository dieseRepository;
 	private final SymtomRepository symtomRepository;
+	private final ConsultationRepository consultationRepository;
 	private final SolutionRepository solutionRepository;
 	private final ConsultationService consultationService;
 	private final UserRepository userRepository;
 	private final PasswordEncoder passwordEncoder;
+	private final DateService dateService;
 
 	private final TransactionTemplate transactionTemplate;
 	private List<Symptom> symtoms = new ArrayList<>();
 
 	@Override
 	public void run(String... args) throws Exception {
+		dieseRepository.deleteAll();
+		symtomRepository.deleteAll();
+		consultationRepository.deleteAll();
+
 		generateDieses();
 
 		generaSymtom();
@@ -51,7 +62,7 @@ public class Runner implements CommandLineRunner {
 
 		generateSolution();
 
-		for (int i = 0; i < 300; i++) {
+		for (int i = 0; i < 15000; i++) {
 			generateConsultation();
 		}
 
@@ -80,7 +91,7 @@ public class Runner implements CommandLineRunner {
 		};
 
 		List<DieseJson> dieses = dieseRepository.findAll().stream()
-				.filter(diese -> Math.random() > 0.8)
+				.filter(diese -> Math.random() > 0.7)
 				.map(diese -> {
 					List<SolutionJson> solutions = solutionRepository.findByDieseId(diese.getId()).stream()
 							.map(solution -> new SolutionJson(solution.getName(), solution.getDescription()))
@@ -99,8 +110,17 @@ public class Runner implements CommandLineRunner {
 			return new SymtomJson(symtom.getName(), symtom.getCode(), symtom.getDsValue());
 		}).collect(Collectors.toList());
 
-		consultationService
-				.save(new Consultation(null, null, "Farhan", LocalDateTime.now(), dieses, symtoms));
+		LocalDateTime start = LocalDateTime.of(2023, 1, 1, 0, 0);
+		LocalDateTime end = LocalDateTime.of(2023, 12, 31, 23, 59);
+
+		LocalDateTime randomDateTime = dateService.getRandomDateTimeBetween(start, end);
+
+		Faker faker = new Faker(new Locale("in-ID"));
+
+		String name = faker.name().fullName();
+		Consultation consultation = new Consultation(null, null, name, randomDateTime, dieses, symtoms);
+
+		consultationService.save(consultation);
 	}
 
 	private void generateSolution() {

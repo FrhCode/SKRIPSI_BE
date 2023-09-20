@@ -3,6 +3,7 @@ package com.farhan.skripsibe.service;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.Date;
 
 import org.springframework.stereotype.Service;
@@ -16,18 +17,18 @@ import lombok.RequiredArgsConstructor;
 public class InvoiceService {
 	private final ConsultationRepository consultationRepository;
 
-	private long countInvoiceForToday() {
-		LocalDateTime startOfToday = LocalDateTime.now().with(LocalTime.MIN); // Start of today
+	private long countInvoiceForToday(LocalDateTime dateTime) {
+		LocalDateTime startOfToday = dateTime.with(LocalTime.MIN); // Start of today
 		return consultationRepository.countByInvoiceDateIsAfter(startOfToday);
 	}
 
-	public String generateInvoiceNumber() {
+	public String generateInvoiceNumber(LocalDateTime dateTime) {
 		// Get the current date in the YMD format
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		String currentDate = sdf.format(new Date());
+		String currentDate = sdf.format(Date.from(dateTime.atZone(ZoneId.systemDefault()).toInstant()));
 
 		// Get the current sequence for the day
-		long sequence = countInvoiceForToday() + 1;
+		long sequence = countInvoiceForToday(dateTime) + 1;
 
 		// Generate the invoice number
 		String invoiceNumber = "INV-" + currentDate + "-" + sequence;

@@ -21,7 +21,7 @@ public class ConsultationService {
 	private final ConsultationCriteriaRepository consultationCriteriaRepository;
 
 	public Consultation save(Consultation consultation) {
-		String invoice = invoiceService.generateInvoiceNumber();
+		String invoice = invoiceService.generateInvoiceNumber(consultation.getInvoiceDate());
 		consultation.setInvoice(invoice);
 		return consultationRepository.save(consultation);
 	}
