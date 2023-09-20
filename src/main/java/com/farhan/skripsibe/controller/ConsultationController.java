@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.farhan.skripsibe.model.Consultation;
 import com.farhan.skripsibe.request.ConsultationPaginateRequest;
+import com.farhan.skripsibe.response.GetAllResponse;
 import com.farhan.skripsibe.service.ConsultationService;
 
 import lombok.RequiredArgsConstructor;
@@ -32,6 +33,11 @@ public class ConsultationController {
 		long symtomCount = consultationService.count();
 		response.put("consultation_count", symtomCount);
 		return response;
+	}
+
+	@GetMapping("all")
+	public GetAllResponse<Consultation> all() {
+		return new GetAllResponse<Consultation>(consultationService.findAll());
 	}
 
 	@GetMapping
