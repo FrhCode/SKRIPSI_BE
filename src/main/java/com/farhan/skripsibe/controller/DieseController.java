@@ -1,9 +1,9 @@
 package com.farhan.skripsibe.controller;
 
-import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.farhan.skripsibe.exception.BadRequestException;
 import com.farhan.skripsibe.model.Diese;
 import com.farhan.skripsibe.model.Symptom;
+import com.farhan.skripsibe.repository.DieseRepository;
+import com.farhan.skripsibe.repository.SymtomRepository;
 import com.farhan.skripsibe.request.AddSymptomsRequest;
 import com.farhan.skripsibe.request.PaginateDieseRequest;
 import com.farhan.skripsibe.service.DieseService;
@@ -32,6 +34,8 @@ import lombok.RequiredArgsConstructor;
 public class DieseController {
 	private final DieseService dieseService;
 	private final SymtomService symtomService;
+	private final DieseRepository dieseRepository;
+	private final SymtomRepository symtomRepository;
 
 	@GetMapping("count")
 	public Map<String, Object> count() {
@@ -49,7 +53,7 @@ public class DieseController {
 
 	@GetMapping("{code}/symptoms")
 	public Map<String, Object> getSymtoms(@PathVariable String code) {
-		List<Symptom> symptoms = dieseService.getSymtoms(code);
+		Set<Symptom> symptoms = dieseService.getSymtoms(code);
 		Map<String, Object> response = new HashMap<>();
 		response.put("data", symptoms);
 		return response;
@@ -73,6 +77,12 @@ public class DieseController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseBody.getResponseBody());
 
 		}
+
+		Diese P1 = dieseRepository.findByCode(code).orElseThrow();
+
+		P1.addSymptom(symtomRepository.findByCode(symptomsCode.get(0)).get());
+
+		dieseRepository.save(P1);
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(null);
 	}

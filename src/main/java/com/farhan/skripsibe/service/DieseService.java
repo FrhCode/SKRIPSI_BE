@@ -1,7 +1,7 @@
 package com.farhan.skripsibe.service;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -32,7 +32,7 @@ public class DieseService {
 		return dieseCriteriaRepository.paginate(paginateDieseRequest);
 	}
 
-	public List<Symptom> getSymtoms(String code) {
+	public Set<Symptom> getSymtoms(String code) {
 		return dieseRepository.findByCode(code).get().getSymptoms();
 	}
 

@@ -1,7 +1,9 @@
 package com.farhan.skripsibe.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -34,7 +36,7 @@ public class Diese {
 			@JoinColumn(name = "id_gejala") }, name = "rule_base")
 	@Setter(AccessLevel.NONE)
 	@JsonIgnore
-	private final List<Symptom> symptoms = new ArrayList<>();
+	private final Set<Symptom> symptoms = new HashSet<>();
 
 	@OneToMany(cascade = { CascadeType.REMOVE }, mappedBy = "diese")
 	@Setter(AccessLevel.NONE)
