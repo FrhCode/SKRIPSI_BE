@@ -29,7 +29,7 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 		errorResponse.put("message", "Validation failed");
 		errorResponse.put("timestamp", LocalDateTime.now());
 		errorResponse.put("errors", errors);
-		return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+		return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
 	}
 
 }

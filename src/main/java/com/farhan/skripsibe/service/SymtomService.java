@@ -1,6 +1,7 @@
 package com.farhan.skripsibe.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,19 @@ public class SymtomService {
 
 	public long count() {
 		return symtomRepository.count();
+	}
+
+	public boolean checkSymptomsCodeValid(List<String> symptomsCode) {
+		boolean isValid = true;
+
+		for (String symptomCode : symptomsCode) {
+			Optional<Symptom> symptom = symtomRepository.findByCode(symptomCode);
+			if (!symptom.isPresent()) {
+				isValid = false;
+			}
+		}
+
+		return isValid;
 	}
 
 }
