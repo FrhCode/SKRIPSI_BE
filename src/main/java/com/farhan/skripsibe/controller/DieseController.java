@@ -84,6 +84,9 @@ public class DieseController {
 
 		dieseRepository.save(P1);
 
-		return ResponseEntity.status(HttpStatus.CREATED).body(null);
+		Map<String, String> response = new HashMap<>();
+		response.put("status", "created");
+
+		return ResponseEntity.status(HttpStatus.CREATED).body(response);
 	}
 }
