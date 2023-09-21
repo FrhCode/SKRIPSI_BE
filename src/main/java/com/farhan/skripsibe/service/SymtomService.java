@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.farhan.skripsibe.model.Symptom;
 import com.farhan.skripsibe.repository.SymtomCriteriaRepository;
 import com.farhan.skripsibe.repository.SymtomRepository;
-import com.farhan.skripsibe.request.SymtomPaginateRequest;
+import com.farhan.skripsibe.request.PaginateSymtomRequest;
 import com.farhan.skripsibe.request.SymtomSearchRequest;
 
 import lombok.RequiredArgsConstructor;
@@ -27,7 +27,7 @@ public class SymtomService {
 		return symtomCriteriaRepository.search(request);
 	}
 
-	public Page<Symptom> paginate(SymtomPaginateRequest symtomPaginateRequest) {
+	public Page<Symptom> paginate(PaginateSymtomRequest symtomPaginateRequest) {
 		return symtomCriteriaRepository.paginate(symtomPaginateRequest);
 	}
 

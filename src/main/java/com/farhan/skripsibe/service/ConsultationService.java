@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.farhan.skripsibe.model.Consultation;
 import com.farhan.skripsibe.repository.ConsultationCriteriaRepository;
 import com.farhan.skripsibe.repository.ConsultationRepository;
-import com.farhan.skripsibe.request.ConsultationPaginateRequest;
+import com.farhan.skripsibe.request.PaginateConsultationRequest;
 
 import lombok.RequiredArgsConstructor;
 
@@ -43,7 +43,7 @@ public class ConsultationService {
 		return consultationRepository.count();
 	}
 
-	public Page<Consultation> paginate(ConsultationPaginateRequest consultationPaginateRequest) {
+	public Page<Consultation> paginate(PaginateConsultationRequest consultationPaginateRequest) {
 		return consultationCriteriaRepository.paginate(consultationPaginateRequest);
 	}
 }

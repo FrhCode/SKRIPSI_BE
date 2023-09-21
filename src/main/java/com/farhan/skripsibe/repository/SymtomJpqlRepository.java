@@ -10,7 +10,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Repository;
 
 import com.farhan.skripsibe.model.Symptom;
-import com.farhan.skripsibe.request.SymtomPaginateRequest;
+import com.farhan.skripsibe.request.PaginateSymtomRequest;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
@@ -21,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 public class SymtomJpqlRepository {
 	private final EntityManager em;
 
-	public Page<Symptom> paginate(SymtomPaginateRequest symtomPaginateRequest) {
+	public Page<Symptom> paginate(PaginateSymtomRequest symtomPaginateRequest) {
 		Integer pageNumber = symtomPaginateRequest.getPage();
 		Integer pageSize = symtomPaginateRequest.getSize();
 		String query = symtomPaginateRequest.getQuery();

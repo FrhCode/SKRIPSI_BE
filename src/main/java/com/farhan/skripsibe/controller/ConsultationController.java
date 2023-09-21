@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.farhan.skripsibe.model.Consultation;
-import com.farhan.skripsibe.request.ConsultationPaginateRequest;
+import com.farhan.skripsibe.request.PaginateConsultationRequest;
 import com.farhan.skripsibe.response.GetAllResponse;
 import com.farhan.skripsibe.service.ConsultationService;
 
@@ -53,7 +53,7 @@ public class ConsultationController {
 	}
 
 	@GetMapping
-	public Page<Consultation> paginate(ConsultationPaginateRequest consultationPaginateRequest) {
+	public Page<Consultation> paginate(PaginateConsultationRequest consultationPaginateRequest) {
 		return consultationService.paginate(consultationPaginateRequest);
 	}
 }

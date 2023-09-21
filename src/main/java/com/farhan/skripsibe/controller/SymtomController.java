@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.farhan.skripsibe.model.Symptom;
-import com.farhan.skripsibe.request.SymtomPaginateRequest;
+import com.farhan.skripsibe.request.PaginateSymtomRequest;
 import com.farhan.skripsibe.request.SymtomSearchRequest;
 import com.farhan.skripsibe.response.GetAllResponse;
 import com.farhan.skripsibe.service.SymtomService;
@@ -43,7 +43,7 @@ public class SymtomController {
 	}
 
 	@GetMapping
-	public Page<Symptom> paginate(SymtomPaginateRequest symtomPaginateRequest) {
+	public Page<Symptom> paginate(PaginateSymtomRequest symtomPaginateRequest) {
 		return symtomService.paginate(symtomPaginateRequest);
 	}
 }

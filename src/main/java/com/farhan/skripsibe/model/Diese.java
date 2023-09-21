@@ -13,7 +13,6 @@ import lombok.*;
 @NoArgsConstructor
 @EqualsAndHashCode(exclude = { "symptoms" })
 @ToString(exclude = { "symptoms" })
-// @Builder
 @Entity
 @Table(name = "penyakit")
 public class Diese {

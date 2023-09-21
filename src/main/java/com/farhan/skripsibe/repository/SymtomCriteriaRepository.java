@@ -11,7 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
 import com.farhan.skripsibe.model.Symptom;
-import com.farhan.skripsibe.request.SymtomPaginateRequest;
+import com.farhan.skripsibe.request.PaginateSymtomRequest;
 import com.farhan.skripsibe.request.SymtomSearchRequest;
 
 import jakarta.persistence.EntityManager;
@@ -78,7 +78,7 @@ public class SymtomCriteriaRepository {
 		return em.createQuery(cq).getResultList();
 	}
 
-	public Page<Symptom> paginate(SymtomPaginateRequest request) {
+	public Page<Symptom> paginate(PaginateSymtomRequest request) {
 		Integer pageNumber = request.getPage();
 		Integer pageSize = request.getSize();
 
@@ -103,7 +103,7 @@ public class SymtomCriteriaRepository {
 		return new PageImpl<>(symtoms, pageable, symtomsCount);
 	}
 
-	private long getPaginateCount(SymtomPaginateRequest request) {
+	private long getPaginateCount(PaginateSymtomRequest request) {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Long> cq = cb.createQuery(Long.class);
 		Root<Symptom> symtomRoot = cq.from(Symptom.class);
@@ -116,7 +116,7 @@ public class SymtomCriteriaRepository {
 		return em.createQuery(cq).getSingleResult();
 	}
 
-	private Pageable getPageable(SymtomPaginateRequest request) {
+	private Pageable getPageable(PaginateSymtomRequest request) {
 		Integer pageNumber = request.getPage();
 		Integer pageSize = request.getSize();
 
@@ -124,7 +124,7 @@ public class SymtomCriteriaRepository {
 		return PageRequest.of(pageNumber, pageSize, sort);
 	}
 
-	private void setOrder(SymtomPaginateRequest request, CriteriaBuilder cb, CriteriaQuery<Symptom> cq,
+	private void setOrder(PaginateSymtomRequest request, CriteriaBuilder cb, CriteriaQuery<Symptom> cq,
 			Root<Symptom> symtomRoot) {
 
 		if (request.getSortDirection().equals(Sort.Direction.ASC)) {
@@ -136,7 +136,7 @@ public class SymtomCriteriaRepository {
 		}
 	}
 
-	private Predicate getPredicate(SymtomPaginateRequest request, Root<Symptom> symtomRoot, CriteriaBuilder cb) {
+	private Predicate getPredicate(PaginateSymtomRequest request, Root<Symptom> symtomRoot, CriteriaBuilder cb) {
 
 		List<Predicate> predicates = new ArrayList<>();
 

@@ -38,5 +38,5 @@ public class Consultation {
 
 	@Convert(converter = SymtomResultConverter.class)
 	@Column(columnDefinition = "TEXT", name = "list gejala", nullable = false)
-	private List<SymtomJson> symtoms;
+	private List<SymtomJson> symptoms;
 }

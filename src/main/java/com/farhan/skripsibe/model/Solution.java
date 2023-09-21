@@ -19,7 +19,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @EqualsAndHashCode(exclude = { "diese" })
 @ToString(exclude = { "diese" })
-// @Builder
 @Entity
 @Table(name = "solusi")
 public class Solution {

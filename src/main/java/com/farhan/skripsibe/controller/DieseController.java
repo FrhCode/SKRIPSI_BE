@@ -3,10 +3,13 @@ package com.farhan.skripsibe.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.farhan.skripsibe.model.Diese;
+import com.farhan.skripsibe.request.PaginateDieseRequest;
 import com.farhan.skripsibe.service.DieseService;
 
 import lombok.RequiredArgsConstructor;
@@ -22,6 +25,13 @@ public class DieseController {
 		Map<String, Object> response = new HashMap<>();
 		long symtomCount = dieseService.count();
 		response.put("diese_count", symtomCount);
+
 		return response;
 	}
+
+	@GetMapping
+	public Page<Diese> paginate(PaginateDieseRequest paginateDieseRequest) {
+		return dieseService.paginate(paginateDieseRequest);
+	}
+
 }
