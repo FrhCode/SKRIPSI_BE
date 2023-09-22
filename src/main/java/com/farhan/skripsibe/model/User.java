@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(indexes = {
 		@Index(name = "unique_email_constraint", columnList = "email", unique = true)
-})
+}, name = "users")
 public class User implements UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

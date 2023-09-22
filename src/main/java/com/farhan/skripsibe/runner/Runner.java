@@ -9,7 +9,9 @@ import java.util.Locale;
 import java.util.stream.Collectors;
 
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import com.farhan.skripsibe.model.Consultation;
@@ -32,8 +34,9 @@ import com.github.javafaker.Faker;
 
 import lombok.RequiredArgsConstructor;
 
-// @Component
+@Component
 @RequiredArgsConstructor
+// @Profile("test")
 public class Runner implements CommandLineRunner {
 	private final DieseRepository dieseRepository;
 	private final SymtomRepository symtomRepository;
@@ -61,7 +64,7 @@ public class Runner implements CommandLineRunner {
 
 		generateSolution();
 
-		for (int i = 0; i < 15000; i++) {
+		for (int i = 0; i < 100; i++) {
 			generateConsultation();
 		}
 
