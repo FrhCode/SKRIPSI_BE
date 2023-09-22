@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import com.farhan.skripsibe.exception.BadRequestException;
+
 @RestControllerAdvice
 public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler {
 
@@ -26,10 +28,8 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 			errors.put(error.getField(), error.getDefaultMessage());
 		});
 
-		errorResponse.put("message", "Validation failed");
-		errorResponse.put("timestamp", LocalDateTime.now());
-		errorResponse.put("errors", errors);
-		return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+		BadRequestException badRequestException = new BadRequestException(errors);
+		return new ResponseEntity<>(badRequestException, HttpStatus.BAD_REQUEST);
 	}
 
 }
