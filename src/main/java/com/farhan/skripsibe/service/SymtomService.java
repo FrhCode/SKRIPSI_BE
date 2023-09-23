@@ -24,6 +24,10 @@ public class SymtomService {
 		return symtomCriteriaRepository.findAll();
 	}
 
+	public Optional<Symptom> findByCode(String code) {
+		return symtomRepository.findByCode(code);
+	}
+
 	public List<Symptom> search(SymtomSearchRequest request) {
 		return symtomCriteriaRepository.search(request);
 	}
