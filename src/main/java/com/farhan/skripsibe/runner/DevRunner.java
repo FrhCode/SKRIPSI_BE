@@ -9,7 +9,9 @@ import java.util.Locale;
 import java.util.stream.Collectors;
 
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import com.farhan.skripsibe.model.Consultation;
@@ -21,7 +23,6 @@ import com.farhan.skripsibe.model.User;
 import com.farhan.skripsibe.model.json.DieseJson;
 import com.farhan.skripsibe.model.json.SolutionJson;
 import com.farhan.skripsibe.model.json.SymtomJson;
-import com.farhan.skripsibe.repository.ConsultationRepository;
 import com.farhan.skripsibe.repository.DieseRepository;
 import com.farhan.skripsibe.repository.SolutionRepository;
 import com.farhan.skripsibe.repository.SymtomRepository;
@@ -32,13 +33,12 @@ import com.github.javafaker.Faker;
 
 import lombok.RequiredArgsConstructor;
 
-// @Component
+@Component
 @RequiredArgsConstructor
-// @Profile("dev")
+@Profile({ "dev", "test-dev" })
 public class DevRunner implements CommandLineRunner {
 	private final DieseRepository dieseRepository;
 	private final SymtomRepository symtomRepository;
-	private final ConsultationRepository consultationRepository;
 	private final SolutionRepository solutionRepository;
 	private final ConsultationService consultationService;
 	private final UserRepository userRepository;
@@ -50,10 +50,6 @@ public class DevRunner implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		dieseRepository.deleteAll();
-		symtomRepository.deleteAll();
-		consultationRepository.deleteAll();
-
 		generateDieses();
 
 		generaSymtom();
@@ -62,7 +58,7 @@ public class DevRunner implements CommandLineRunner {
 
 		generateSolution();
 
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < 5; i++) {
 			generateConsultation();
 		}
 

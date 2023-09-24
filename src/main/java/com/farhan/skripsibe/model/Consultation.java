@@ -3,8 +3,8 @@ package com.farhan.skripsibe.model;
 import java.util.List;
 import java.time.LocalDateTime;
 
-import com.farhan.skripsibe.model.converter.DieseResultConverter;
-import com.farhan.skripsibe.model.converter.SymtomResultConverter;
+import com.farhan.skripsibe.model.converter.DieseJsonConverter;
+import com.farhan.skripsibe.model.converter.SymtomJsonConverter;
 import com.farhan.skripsibe.model.json.DieseJson;
 import com.farhan.skripsibe.model.json.SymtomJson;
 
@@ -32,11 +32,11 @@ public class Consultation {
 	@Column(name = "tanggal konsultasi", nullable = false)
 	private LocalDateTime invoiceDate;
 
-	@Convert(converter = DieseResultConverter.class)
+	@Convert(converter = DieseJsonConverter.class)
 	@Column(columnDefinition = "TEXT", name = "hasil diagnosa", nullable = false)
 	private List<DieseJson> dieses;
 
-	@Convert(converter = SymtomResultConverter.class)
+	@Convert(converter = SymtomJsonConverter.class)
 	@Column(columnDefinition = "TEXT", name = "list gejala", nullable = false)
 	private List<SymtomJson> symptoms;
 }

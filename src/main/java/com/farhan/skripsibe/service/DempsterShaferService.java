@@ -1,6 +1,7 @@
 package com.farhan.skripsibe.service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class DempsterShaferService {
 
-	public void calculate(List<Symptom> symptoms) {
+	public MassFuntion calculate(List<Symptom> symptoms) {
 		List<MassFuntion> massFuntions = convertSymptomsToMassFuntion(symptoms);
 
 		while (massFuntions.size() > 1) {
@@ -29,7 +30,10 @@ public class DempsterShaferService {
 			massFuntions.add(0, massFuntion);
 		}
 
-		System.out.println(massFuntions);
+		MassFuntion massFuntion = massFuntions.get(0);
+		massFuntion.sort();
+
+		return massFuntion;
 
 	}
 
@@ -57,11 +61,12 @@ public class DempsterShaferService {
 
 		for (MassData massData : massDataList) {
 			if (massData.getDiese().contains("empty")) {
-				totalValueOfEmptyDieses.add(massData.getValue());
+				totalValueOfEmptyDieses = totalValueOfEmptyDieses.add(massData.getValue());
 			} else {
 				if (massDataSet.containsKey(massData.getDiese())) {
 					MassData existingMassData = massDataSet.get(massData.getDiese());
 					existingMassData.setValue(existingMassData.getValue().add(massData.getValue()));
+					massDataSet.put(massData.getDiese(), existingMassData);
 				} else {
 					massDataSet.put(massData.getDiese(), massData);
 				}
@@ -73,7 +78,8 @@ public class DempsterShaferService {
 		List<MassData> clearedMassDataList = new ArrayList<>(massDataSet.values());
 
 		for (MassData massData : clearedMassDataList) {
-			BigDecimal value = massData.getValue().divide(BigDecimal.ONE.subtract(totalValueOfEmptyDieses));
+			BigDecimal value = massData.getValue().divide(BigDecimal.ONE.subtract(totalValueOfEmptyDieses), 6,
+					RoundingMode.HALF_UP);
 			massData.setValue(value);
 			massFuntion.addMassDataList(massData);
 		}
