@@ -1,7 +1,9 @@
 package com.farhan.skripsibe.service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -16,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class SymtomService {
+public class SymptomService {
 	private final SymtomCriteriaRepository symtomCriteriaRepository;
 	private final SymtomRepository symtomRepository;
 
@@ -51,6 +53,16 @@ public class SymtomService {
 		}
 
 		return isValid;
+	}
+
+	public List<Symptom> getRandomData(int min, int max) {
+		List<Symptom> symptoms = symtomRepository.findAll();
+		Collections.shuffle(symptoms);
+
+		Random random = new Random();
+		int size = random.nextInt(max - min + 1) + min;
+
+		return symptoms.subList(0, size);
 	}
 
 }

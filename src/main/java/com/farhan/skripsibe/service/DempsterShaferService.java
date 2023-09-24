@@ -42,7 +42,7 @@ public class DempsterShaferService {
 
 		for (MassData massData1 : m1.getMassDataList()) {
 			for (MassData massData2 : m2.getMassDataList()) {
-				List<String> diese = getIntersection(massData1.getDiese(), massData2.getDiese());
+				List<String> diese = getIntersection(massData1.getDieses(), massData2.getDieses());
 				BigDecimal value = massData1.getValue().multiply(massData2.getValue());
 
 				MassData massData = new MassData(diese, value);
@@ -60,15 +60,15 @@ public class DempsterShaferService {
 		Map<List<String>, MassData> massDataSet = new HashMap<>();
 
 		for (MassData massData : massDataList) {
-			if (massData.getDiese().contains("empty")) {
+			if (massData.getDieses().contains("empty")) {
 				totalValueOfEmptyDieses = totalValueOfEmptyDieses.add(massData.getValue());
 			} else {
-				if (massDataSet.containsKey(massData.getDiese())) {
-					MassData existingMassData = massDataSet.get(massData.getDiese());
+				if (massDataSet.containsKey(massData.getDieses())) {
+					MassData existingMassData = massDataSet.get(massData.getDieses());
 					existingMassData.setValue(existingMassData.getValue().add(massData.getValue()));
-					massDataSet.put(massData.getDiese(), existingMassData);
+					massDataSet.put(massData.getDieses(), existingMassData);
 				} else {
-					massDataSet.put(massData.getDiese(), massData);
+					massDataSet.put(massData.getDieses(), massData);
 				}
 			}
 		}

@@ -23,7 +23,7 @@ import com.farhan.skripsibe.repository.SymtomRepository;
 import com.farhan.skripsibe.request.AddSymptomsRequest;
 import com.farhan.skripsibe.request.PaginateDieseRequest;
 import com.farhan.skripsibe.service.DieseService;
-import com.farhan.skripsibe.service.SymtomService;
+import com.farhan.skripsibe.service.SymptomService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +33,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class DieseController {
 	private final DieseService dieseService;
-	private final SymtomService symtomService;
+	private final SymptomService symtomService;
 	private final DieseRepository dieseRepository;
 	private final SymtomRepository symtomRepository;
 

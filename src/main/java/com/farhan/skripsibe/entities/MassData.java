@@ -15,6 +15,6 @@ public class MassData {
 	// list.size = 0, berarti teta
 	// list.mengandung empty, berarti waktu perhitungan mass ngak intersection antar
 	// penyakit
-	private List<String> diese = new ArrayList<>();
+	private List<String> dieses = new ArrayList<>();
 	private BigDecimal value = new BigDecimal(0);
 }

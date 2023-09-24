@@ -24,7 +24,7 @@ public class Case1DempsterShaferServiceTest {
 	private DempsterShaferService dempsterShaferService;
 
 	@Autowired
-	private SymtomService symtomService;
+	private SymptomService symtomService;
 
 	@Test
 	@Transactional
@@ -46,12 +46,12 @@ public class Case1DempsterShaferServiceTest {
 
 			List<MassData> massDataListResult = result.getMassDataList();
 
-			List<String> resultDieses = massDataListResult.get(i).getDiese();
+			List<String> resultDieses = massDataListResult.get(i).getDieses();
 			BigDecimal roundedResultValue = massDataListResult.get(i).getValue().setScale(4, RoundingMode.HALF_UP);
 
 			List<MassData> massDataListExpected = expected.getMassDataList();
 
-			List<String> expectedDieses = massDataListExpected.get(i).getDiese();
+			List<String> expectedDieses = massDataListExpected.get(i).getDieses();
 			BigDecimal roundedExpectedValue = massDataListExpected.get(i).getValue().setScale(4, RoundingMode.HALF_UP);
 
 			assertEquals(expectedDieses, resultDieses);

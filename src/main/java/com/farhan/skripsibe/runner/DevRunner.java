@@ -2,11 +2,8 @@ package com.farhan.skripsibe.runner;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
-import java.util.stream.Collectors;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
@@ -14,21 +11,24 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.support.TransactionTemplate;
 
+import com.farhan.skripsibe.entities.MassFuntion;
 import com.farhan.skripsibe.model.Consultation;
 import com.farhan.skripsibe.model.Diese;
 import com.farhan.skripsibe.model.Role;
 import com.farhan.skripsibe.model.Solution;
 import com.farhan.skripsibe.model.Symptom;
 import com.farhan.skripsibe.model.User;
-import com.farhan.skripsibe.model.json.DieseJson;
-import com.farhan.skripsibe.model.json.SolutionJson;
+import com.farhan.skripsibe.model.json.ResultJson;
 import com.farhan.skripsibe.model.json.SymtomJson;
 import com.farhan.skripsibe.repository.DieseRepository;
 import com.farhan.skripsibe.repository.SolutionRepository;
 import com.farhan.skripsibe.repository.SymtomRepository;
 import com.farhan.skripsibe.repository.UserRepository;
 import com.farhan.skripsibe.service.ConsultationService;
+import com.farhan.skripsibe.service.ConverterService;
 import com.farhan.skripsibe.service.DateService;
+import com.farhan.skripsibe.service.DempsterShaferService;
+import com.farhan.skripsibe.service.SymptomService;
 import com.github.javafaker.Faker;
 
 import lombok.RequiredArgsConstructor;
@@ -44,9 +44,11 @@ public class DevRunner implements CommandLineRunner {
 	private final UserRepository userRepository;
 	private final PasswordEncoder passwordEncoder;
 	private final DateService dateService;
+	private final DempsterShaferService dempsterShaferService;
+	private final SymptomService symptomService;
+	private final ConverterService converterService;
 
 	private final TransactionTemplate transactionTemplate;
-	private List<Symptom> symtoms = new ArrayList<>();
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -78,45 +80,37 @@ public class DevRunner implements CommandLineRunner {
 	}
 
 	private void generateConsultation() {
-		Comparator<DieseJson> soryDiesesByPercentage = new Comparator<DieseJson>() {
-			@Override
-			public int compare(DieseJson arg0, DieseJson arg1) {
-				return arg1.getPercentage().compareTo(arg0.getPercentage());
+
+		transactionTemplate.execute(transactionStatus -> {
+			try {
+				List<Symptom> symtoms = symptomService.getRandomData(4, 8);
+
+				MassFuntion massFuntion = dempsterShaferService.calculate(symtoms);
+
+				LocalDateTime start = LocalDateTime.of(2023, 1, 1, 0, 0);
+				LocalDateTime end = LocalDateTime.of(2023, 12, 31, 23, 59);
+
+				LocalDateTime randomDateTime = dateService.getRandomDateTimeBetween(start, end);
+
+				Faker faker = new Faker(new Locale("in-ID"));
+
+				String name = faker.name().fullName();
+
+				List<ResultJson> consultationResults = converterService.massFuntionToResultJsonList(massFuntion);
+
+				List<SymtomJson> symtomJsonsList = converterService.symptomsTosymtomJsonList(symtoms);
+
+				Consultation consultation = new Consultation(null, null, name, randomDateTime, consultationResults,
+						symtomJsonsList);
+
+				consultationService.save(consultation);
+				return null;
+			} catch (Exception e) {
+				transactionStatus.setRollbackOnly(); // Rollback transaction on exception
+				throw e;
 			}
+		});
 
-		};
-
-		List<DieseJson> dieses = dieseRepository.findAll().stream()
-				.filter(diese -> Math.random() > 0.7)
-				.map(diese -> {
-					List<SolutionJson> solutions = solutionRepository.findByDieseId(diese.getId()).stream()
-							.map(solution -> new SolutionJson(solution.getName(), solution.getDescription()))
-							.collect(Collectors.toList());
-
-					DieseJson dieseJson = new DieseJson();
-					dieseJson.setName(diese.getName());
-					dieseJson.setDescription(diese.getDescription());
-					dieseJson.setPercentage(BigDecimal.valueOf(Math.random()));
-					dieseJson.setSolutions(solutions);
-
-					return dieseJson;
-				}).sorted(soryDiesesByPercentage).collect(Collectors.toList());
-
-		List<SymtomJson> symtoms = symtomRepository.findAll().stream().filter(symtom -> Math.random() > 0.7).map(symtom -> {
-			return new SymtomJson(symtom.getName(), symtom.getCode(), symtom.getDsValue());
-		}).collect(Collectors.toList());
-
-		LocalDateTime start = LocalDateTime.of(2023, 1, 1, 0, 0);
-		LocalDateTime end = LocalDateTime.of(2023, 12, 31, 23, 59);
-
-		LocalDateTime randomDateTime = dateService.getRandomDateTimeBetween(start, end);
-
-		Faker faker = new Faker(new Locale("in-ID"));
-
-		String name = faker.name().fullName();
-		Consultation consultation = new Consultation(null, null, name, randomDateTime, dieses, symtoms);
-
-		consultationService.save(consultation);
 	}
 
 	private void generateSolution() {
@@ -323,74 +317,74 @@ public class DevRunner implements CommandLineRunner {
 		transactionTemplate.execute(transactionStatus -> {
 			try {
 				Diese P1 = dieseRepository.findByCode("P1").orElseThrow();
-				P1.addSymptom(getSystomByCode("KG01"));
-				P1.addSymptom(getSystomByCode("KG02"));
-				P1.addSymptom(getSystomByCode("KG03"));
-				P1.addSymptom(getSystomByCode("KG04"));
-				P1.addSymptom(getSystomByCode("KG05"));
+				P1.addSymptom(symtomRepository.findByCode("KG01").get());
+				P1.addSymptom(symtomRepository.findByCode("KG02").get());
+				P1.addSymptom(symtomRepository.findByCode("KG03").get());
+				P1.addSymptom(symtomRepository.findByCode("KG04").get());
+				P1.addSymptom(symtomRepository.findByCode("KG05").get());
 				dieseRepository.save(P1);
 
 				Diese P2 = dieseRepository.findByCode("P2").orElseThrow();
-				P2.addSymptom(getSystomByCode("KG02"));
-				P2.addSymptom(getSystomByCode("KG03"));
-				P2.addSymptom(getSystomByCode("KG04"));
-				P2.addSymptom(getSystomByCode("KG07"));
-				P2.addSymptom(getSystomByCode("KG08"));
+				P2.addSymptom(symtomRepository.findByCode("KG02").get());
+				P2.addSymptom(symtomRepository.findByCode("KG03").get());
+				P2.addSymptom(symtomRepository.findByCode("KG04").get());
+				P2.addSymptom(symtomRepository.findByCode("KG07").get());
+				P2.addSymptom(symtomRepository.findByCode("KG08").get());
 				dieseRepository.save(P2);
 
 				Diese P3 = dieseRepository.findByCode("P3").orElseThrow();
-				P3.addSymptom(getSystomByCode("KG05"));
-				P3.addSymptom(getSystomByCode("KG09"));
+				P3.addSymptom(symtomRepository.findByCode("KG05").get());
+				P3.addSymptom(symtomRepository.findByCode("KG09").get());
 				dieseRepository.save(P3);
 
 				Diese P4 = dieseRepository.findByCode("P4").orElseThrow();
-				P4.addSymptom(getSystomByCode("KG01"));
-				P4.addSymptom(getSystomByCode("KG02"));
-				P4.addSymptom(getSystomByCode("KG10"));
+				P4.addSymptom(symtomRepository.findByCode("KG01").get());
+				P4.addSymptom(symtomRepository.findByCode("KG02").get());
+				P4.addSymptom(symtomRepository.findByCode("KG10").get());
 				dieseRepository.save(P4);
 
 				Diese P5 = dieseRepository.findByCode("P5").orElseThrow();
-				P5.addSymptom(getSystomByCode("KG01"));
-				P5.addSymptom(getSystomByCode("KG02"));
-				P5.addSymptom(getSystomByCode("KG06"));
-				P5.addSymptom(getSystomByCode("KG11"));
-				P5.addSymptom(getSystomByCode("KG12"));
+				P5.addSymptom(symtomRepository.findByCode("KG01").get());
+				P5.addSymptom(symtomRepository.findByCode("KG02").get());
+				P5.addSymptom(symtomRepository.findByCode("KG06").get());
+				P5.addSymptom(symtomRepository.findByCode("KG11").get());
+				P5.addSymptom(symtomRepository.findByCode("KG12").get());
 				dieseRepository.save(P5);
 
 				Diese P6 = dieseRepository.findByCode("P6").orElseThrow();
-				P6.addSymptom(getSystomByCode("KG06"));
-				P6.addSymptom(getSystomByCode("KG13"));
-				P6.addSymptom(getSystomByCode("KG14"));
+				P6.addSymptom(symtomRepository.findByCode("KG06").get());
+				P6.addSymptom(symtomRepository.findByCode("KG13").get());
+				P6.addSymptom(symtomRepository.findByCode("KG14").get());
 				dieseRepository.save(P6);
 
 				Diese P7 = dieseRepository.findByCode("P7").orElseThrow();
-				P7.addSymptom(getSystomByCode("KG15"));
-				P7.addSymptom(getSystomByCode("KG16"));
+				P7.addSymptom(symtomRepository.findByCode("KG15").get());
+				P7.addSymptom(symtomRepository.findByCode("KG16").get());
 				dieseRepository.save(P7);
 
 				Diese P8 = dieseRepository.findByCode("P8").orElseThrow();
-				P8.addSymptom(getSystomByCode("KG03"));
-				P8.addSymptom(getSystomByCode("KG17"));
-				P8.addSymptom(getSystomByCode("KG18"));
-				P8.addSymptom(getSystomByCode("KG19"));
+				P8.addSymptom(symtomRepository.findByCode("KG03").get());
+				P8.addSymptom(symtomRepository.findByCode("KG17").get());
+				P8.addSymptom(symtomRepository.findByCode("KG18").get());
+				P8.addSymptom(symtomRepository.findByCode("KG19").get());
 				dieseRepository.save(P8);
 
 				Diese P9 = dieseRepository.findByCode("P9").orElseThrow();
-				P9.addSymptom(getSystomByCode("KG03"));
-				P9.addSymptom(getSystomByCode("KG04"));
-				P9.addSymptom(getSystomByCode("KG19"));
+				P9.addSymptom(symtomRepository.findByCode("KG03").get());
+				P9.addSymptom(symtomRepository.findByCode("KG04").get());
+				P9.addSymptom(symtomRepository.findByCode("KG19").get());
 				dieseRepository.save(P9);
 
 				Diese P10 = dieseRepository.findByCode("P10").orElseThrow();
-				P10.addSymptom(getSystomByCode("KG04"));
-				P10.addSymptom(getSystomByCode("KG06"));
-				P10.addSymptom(getSystomByCode("KG19"));
-				P10.addSymptom(getSystomByCode("KG20"));
+				P10.addSymptom(symtomRepository.findByCode("KG04").get());
+				P10.addSymptom(symtomRepository.findByCode("KG06").get());
+				P10.addSymptom(symtomRepository.findByCode("KG19").get());
+				P10.addSymptom(symtomRepository.findByCode("KG20").get());
 				dieseRepository.save(P10);
 
 				Diese P11 = dieseRepository.findByCode("P11").orElseThrow();
-				P11.addSymptom(getSystomByCode("KG21"));
-				P11.addSymptom(getSystomByCode("KG22"));
+				P11.addSymptom(symtomRepository.findByCode("KG21").get());
+				P11.addSymptom(symtomRepository.findByCode("KG22").get());
 				dieseRepository.save(P11);
 
 				return null;
@@ -399,10 +393,6 @@ public class DevRunner implements CommandLineRunner {
 				throw e;
 			}
 		});
-	}
-
-	private Symptom getSystomByCode(String code) {
-		return symtoms.stream().filter(sysmtom -> sysmtom.getCode().equals(code)).findFirst().orElseThrow();
 	}
 
 	private void generaSymtom() {
@@ -433,8 +423,6 @@ public class DevRunner implements CommandLineRunner {
 				new Symptom(null, "KG22", "Bagian tutup insang, sirip atau mata mengalami luka", BigDecimal.valueOf(.8)));
 
 		symtomRepository.saveAll(symtoms);
-
-		this.symtoms = symtomRepository.findAll();
 	}
 
 	private void generateDieses() {
