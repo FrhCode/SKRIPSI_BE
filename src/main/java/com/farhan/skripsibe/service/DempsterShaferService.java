@@ -31,7 +31,6 @@ public class DempsterShaferService {
 		}
 
 		MassFuntion massFuntion = massFuntions.get(0);
-		massFuntion.sort();
 
 		return massFuntion;
 
