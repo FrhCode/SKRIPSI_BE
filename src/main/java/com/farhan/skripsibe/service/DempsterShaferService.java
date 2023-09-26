@@ -49,7 +49,7 @@ public class DempsterShaferService {
 		}
 
 		MassFuntion massFuntion = massFuntions.get(0);
-		massFuntion.sort();
+
 		ReportJson report = new ReportJson(new Date() + ".pdf".toString(), knowns);
 		return new DempsterShaferObject(massFuntion, report);
 
