@@ -6,7 +6,10 @@ import lombok.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
+import org.springframework.security.config.core.GrantedAuthorityDefaults;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -52,12 +55,16 @@ public class User implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		List<GrantedAuthority> authorities = new ArrayList<>();
-		for (GrantedAuthority grantedAuthority : authorities) {
-			authorities.add(grantedAuthority);
-		}
+		List<GrantedAuthority> grantedAuthoritys = roles.stream().map(role -> {
+			return new GrantedAuthority() {
+				@Override
+				public String getAuthority() {
+					return role.getName();
+				}
+			};
+		}).collect(Collectors.toList());
 
-		return authorities;
+		return grantedAuthoritys;
 	}
 
 	@Override

@@ -37,7 +37,8 @@ public class JwtService {
 	}
 
 	public String extractName(String token) {
-		String firstName = extractClaim(token, claims -> (String) claims.get("firstname"));
+		Function<Claims, String> claimsResolver = claims -> (String) claims.get("firstname");
+		String firstName = extractClaim(token, claimsResolver);
 		String lastname = extractClaim(token, claims -> (String) claims.get("lastname"));
 		return firstName + " " + lastname;
 	}
