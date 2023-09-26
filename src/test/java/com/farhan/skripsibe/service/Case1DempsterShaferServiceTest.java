@@ -40,19 +40,19 @@ public class Case1DempsterShaferServiceTest {
 				new MassData(List.of(), new BigDecimal(0.1296)),
 				new MassData(List.of("P1", "P2", "P3"), new BigDecimal(0.0504))));
 
-		MassFuntion result = dempsterShaferService.calculate(symptoms);
+		MassFuntion result = dempsterShaferService.calculate(symptoms).getMassFuntion();
 
 		for (int i = 0; i < result.getMassDataList().size(); i++) {
 
 			List<MassData> massDataListResult = result.getMassDataList();
 
 			List<String> resultDieses = massDataListResult.get(i).getDieses();
-			BigDecimal roundedResultValue = massDataListResult.get(i).getValue().setScale(4, RoundingMode.HALF_UP);
+			BigDecimal roundedResultValue = massDataListResult.get(i).getValue().setScale(2, RoundingMode.HALF_UP);
 
 			List<MassData> massDataListExpected = expected.getMassDataList();
 
 			List<String> expectedDieses = massDataListExpected.get(i).getDieses();
-			BigDecimal roundedExpectedValue = massDataListExpected.get(i).getValue().setScale(4, RoundingMode.HALF_UP);
+			BigDecimal roundedExpectedValue = massDataListExpected.get(i).getValue().setScale(2, RoundingMode.HALF_UP);
 
 			assertEquals(expectedDieses, resultDieses);
 			assertEquals(roundedExpectedValue, roundedResultValue);

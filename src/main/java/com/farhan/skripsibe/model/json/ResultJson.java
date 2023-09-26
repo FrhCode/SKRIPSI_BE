@@ -11,6 +11,29 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResultJson {
-	private List<DieseJson> dieses;
+	private List<Diese> dieses;
 	private BigDecimal percentage;
+
+	@Data
+	@NoArgsConstructor
+	@AllArgsConstructor
+	public static class Diese {
+		private String code;
+
+		private String name;
+
+		private String description;
+
+		private List<Solution> solutions;
+
+		@Data
+		@NoArgsConstructor
+		@AllArgsConstructor
+		public static class Solution {
+			private String name;
+			private String description;
+		}
+
+	}
+
 }

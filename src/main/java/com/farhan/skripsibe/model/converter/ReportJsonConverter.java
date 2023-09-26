@@ -1,8 +1,6 @@
 package com.farhan.skripsibe.model.converter;
 
-import java.util.List;
-
-import com.farhan.skripsibe.model.json.ResultJson;
+import com.farhan.skripsibe.model.json.ReportJson;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,13 +11,13 @@ import lombok.extern.slf4j.Slf4j;
 
 @Converter
 @Slf4j
-public class DieseJsonConverter implements AttributeConverter<List<ResultJson>, String> {
+public class ReportJsonConverter implements AttributeConverter<ReportJson, String> {
 	private final ObjectMapper objectMapper = new ObjectMapper();
 
 	@Override
-	public String convertToDatabaseColumn(List<ResultJson> dieses) {
+	public String convertToDatabaseColumn(ReportJson arg0) {
 		try {
-			return objectMapper.writeValueAsString(dieses);
+			return objectMapper.writeValueAsString(arg0);
 		} catch (final JsonProcessingException e) {
 			log.error(e.getMessage(), e);
 			return null;
@@ -27,9 +25,9 @@ public class DieseJsonConverter implements AttributeConverter<List<ResultJson>, 
 	}
 
 	@Override
-	public List<ResultJson> convertToEntityAttribute(String dbData) {
+	public ReportJson convertToEntityAttribute(String arg0) {
 		try {
-			return objectMapper.readValue(dbData, new TypeReference<List<ResultJson>>() {
+			return objectMapper.readValue(arg0, new TypeReference<ReportJson>() {
 			});
 
 		} catch (JsonProcessingException e) {

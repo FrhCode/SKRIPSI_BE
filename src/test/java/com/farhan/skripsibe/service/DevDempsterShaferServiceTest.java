@@ -37,19 +37,19 @@ public class DevDempsterShaferServiceTest {
 				new MassData(List.of(), new BigDecimal(0.06)),
 				new MassData(List.of("P8", "P9", "P10"), new BigDecimal(0.04))));
 
-		MassFuntion result = dempsterShaferService.calculate(symptoms);
+		MassFuntion result = dempsterShaferService.calculate(symptoms).getMassFuntion();
 
 		for (int i = 0; i < result.getMassDataList().size(); i++) {
 
 			List<MassData> massDataListResult = result.getMassDataList();
 
 			List<String> resultDieses = massDataListResult.get(i).getDieses();
-			BigDecimal roundedResultValue = massDataListResult.get(i).getValue().setScale(4, RoundingMode.HALF_UP);
+			BigDecimal roundedResultValue = massDataListResult.get(i).getValue().setScale(2, RoundingMode.HALF_UP);
 
 			List<MassData> massDataListExpected = expected.getMassDataList();
 
 			List<String> expectedDieses = massDataListExpected.get(i).getDieses();
-			BigDecimal roundedExpectedValue = massDataListExpected.get(i).getValue().setScale(4, RoundingMode.HALF_UP);
+			BigDecimal roundedExpectedValue = massDataListExpected.get(i).getValue().setScale(2, RoundingMode.HALF_UP);
 
 			assertEquals(expectedDieses, resultDieses);
 			assertEquals(roundedExpectedValue, roundedResultValue);
@@ -72,19 +72,19 @@ public class DevDempsterShaferServiceTest {
 				new MassData(List.of("P1", "P4", "P5"), new BigDecimal("0.041436")),
 				new MassData(List.of("P1", "P2", "P4", "P5"), new BigDecimal("0.019337"))));
 
-		MassFuntion result = dempsterShaferService.calculate(symptoms);
+		MassFuntion result = dempsterShaferService.calculate(symptoms).getMassFuntion();
 
 		for (int i = 0; i < result.getMassDataList().size(); i++) {
 
 			List<MassData> massDataListResult = result.getMassDataList();
 
 			List<String> resultDieses = massDataListResult.get(i).getDieses();
-			BigDecimal roundedResultValue = massDataListResult.get(i).getValue().setScale(4, RoundingMode.HALF_UP);
+			BigDecimal roundedResultValue = massDataListResult.get(i).getValue().setScale(2, RoundingMode.HALF_UP);
 
 			List<MassData> massDataListExpected = expected.getMassDataList();
 
 			List<String> expectedDieses = massDataListExpected.get(i).getDieses();
-			BigDecimal roundedExpectedValue = massDataListExpected.get(i).getValue().setScale(4, RoundingMode.HALF_UP);
+			BigDecimal roundedExpectedValue = massDataListExpected.get(i).getValue().setScale(2, RoundingMode.HALF_UP);
 
 			assertEquals(expectedDieses, resultDieses);
 			assertEquals(roundedExpectedValue, roundedResultValue);

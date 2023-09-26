@@ -1,5 +1,6 @@
 package com.farhan.skripsibe.runner;
 
+import java.io.FileNotFoundException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -28,7 +29,9 @@ import com.farhan.skripsibe.service.ConsultationService;
 import com.farhan.skripsibe.service.ConverterService;
 import com.farhan.skripsibe.service.DateService;
 import com.farhan.skripsibe.service.DempsterShaferService;
+import com.farhan.skripsibe.service.PdfService;
 import com.farhan.skripsibe.service.SymptomService;
+import com.farhan.skripsibe.service.DempsterShaferService.DempsterShaferObject;
 import com.github.javafaker.Faker;
 
 import lombok.RequiredArgsConstructor;
@@ -47,7 +50,7 @@ public class DevRunner implements CommandLineRunner {
 	private final DempsterShaferService dempsterShaferService;
 	private final SymptomService symptomService;
 	private final ConverterService converterService;
-
+	private final PdfService pdfService;
 	private final TransactionTemplate transactionTemplate;
 
 	@Override
@@ -85,7 +88,7 @@ public class DevRunner implements CommandLineRunner {
 			try {
 				List<Symptom> symtoms = symptomService.getRandomData(4, 8);
 
-				MassFuntion massFuntion = dempsterShaferService.calculate(symtoms);
+				DempsterShaferObject result = dempsterShaferService.calculate(symtoms);
 
 				LocalDateTime start = LocalDateTime.of(2023, 1, 1, 0, 0);
 				LocalDateTime end = LocalDateTime.of(2023, 12, 31, 23, 59);
@@ -96,18 +99,21 @@ public class DevRunner implements CommandLineRunner {
 
 				String name = faker.name().fullName();
 
-				List<ResultJson> consultationResults = converterService.massFuntionToResultJsonList(massFuntion);
+				List<ResultJson> consultationResults = converterService.massFuntionToResultJsonList(result.getMassFuntion());
 
 				List<SymtomJson> symtomJsonsList = converterService.symptomsTosymtomJsonList(symtoms);
 
 				Consultation consultation = new Consultation(null, null, name, randomDateTime, consultationResults,
-						symtomJsonsList);
+						symtomJsonsList, result.getReport());
+
+				pdfService.generateConsultationReport(result.getReport());
 
 				consultationService.save(consultation);
 				return null;
 			} catch (Exception e) {
 				transactionStatus.setRollbackOnly(); // Rollback transaction on exception
-				throw e;
+				System.out.println(e.getMessage());
+				return null;
 			}
 		});
 
