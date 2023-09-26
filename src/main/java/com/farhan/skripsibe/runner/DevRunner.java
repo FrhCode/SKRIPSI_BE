@@ -38,7 +38,7 @@ import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-@Profile({ "dev", "test-dev" })
+@Profile({ "dev", "test-dev", "staging" })
 public class DevRunner implements CommandLineRunner {
 	private final DieseRepository dieseRepository;
 	private final SymtomRepository symtomRepository;
@@ -63,7 +63,7 @@ public class DevRunner implements CommandLineRunner {
 
 		generateSolution();
 
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 500; i++) {
 			generateConsultation();
 		}
 

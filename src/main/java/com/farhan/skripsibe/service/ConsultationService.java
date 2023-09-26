@@ -36,7 +36,7 @@ public class ConsultationService {
 	}
 
 	public Consultation findByinvoice(String invoiceNumber) {
-		return consultationRepository.findByinvoice(invoiceNumber);
+		return consultationRepository.findByinvoice(invoiceNumber).get();
 	}
 
 	public long count() {

@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 public class InvoiceService {
 	private final ConsultationRepository consultationRepository;
 
-	private long countInvoiceForToday(LocalDateTime dateTime) {
+	private long countInvoiceForADate(LocalDateTime dateTime) {
 		LocalDateTime startOfToday = dateTime.with(LocalTime.MIN); // Start of today
 		return consultationRepository.countByInvoiceDateIsAfter(startOfToday);
 	}
@@ -28,7 +28,7 @@ public class InvoiceService {
 		String currentDate = sdf.format(Date.from(dateTime.atZone(ZoneId.systemDefault()).toInstant()));
 
 		// Get the current sequence for the day
-		long sequence = countInvoiceForToday(dateTime) + 1;
+		long sequence = countInvoiceForADate(dateTime) + 1;
 
 		// Generate the invoice number
 		String invoiceNumber = "INV-" + currentDate + "-" + sequence;

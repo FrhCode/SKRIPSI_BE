@@ -11,5 +11,4 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = false)
 public class PaginateConsultationRequest extends Paginate {
 	private String query = "";
-
 }
