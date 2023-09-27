@@ -1,5 +1,7 @@
 package com.farhan.skripsibe.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,5 +35,6 @@ public class Solution {
 
 	@ManyToOne
 	@JoinColumn(name = "id_penyakit")
+	@JsonIgnore
 	private Diese diese;
 }
