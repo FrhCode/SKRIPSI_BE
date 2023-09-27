@@ -23,8 +23,6 @@ import com.itextpdf.layout.properties.AreaBreakType;
 import com.itextpdf.layout.properties.TextAlignment;
 import com.itextpdf.layout.properties.UnitValue;
 
-// @ActiveProfiles("test-case-1")
-// @SpringBootTest
 public class PdfTest {
 	@Test
 	public void test1() throws IOException {

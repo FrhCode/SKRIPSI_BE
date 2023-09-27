@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.farhan.skripsibe.model.Diese;
 
-@ActiveProfiles("test_youtube_1")
 @SpringBootTest
 public class DieseRepositoryTest {
 	@Autowired
