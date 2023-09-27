@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.farhan.skripsibe.exception.BadRequestException;
 import com.farhan.skripsibe.model.Diese;
+import com.farhan.skripsibe.model.Solution;
 import com.farhan.skripsibe.model.Symptom;
 import com.farhan.skripsibe.repository.DieseRepository;
 import com.farhan.skripsibe.repository.SymtomRepository;
@@ -56,6 +57,14 @@ public class DieseController {
 		Set<Symptom> symptoms = dieseService.getSymtoms(code);
 		Map<String, Object> response = new HashMap<>();
 		response.put("data", symptoms);
+		return response;
+	}
+
+	@GetMapping("{code}/solutions")
+	public Map<String, Object> getSolution(@PathVariable String code) {
+		List<Solution> solutions = dieseRepository.findByCode(code).orElseThrow().getSolutions();
+		Map<String, Object> response = new HashMap<>();
+		response.put("data", solutions);
 		return response;
 	}
 
