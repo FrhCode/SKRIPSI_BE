@@ -1,13 +1,10 @@
 package com.farhan.skripsibe.service;
 
 import java.io.FileNotFoundException;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.farhan.skripsibe.entities.MassData;
 import com.farhan.skripsibe.model.json.ReportJson;
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;

@@ -15,8 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.farhan.skripsibe.entities.MassData;
 import com.farhan.skripsibe.entities.MassFuntion;
 import com.farhan.skripsibe.model.Symptom;
+import com.farhan.skripsibe.repository.SymtomRepository;
 
-@ActiveProfiles("test-case-1")
+@ActiveProfiles("test_youtube_1")
 @SpringBootTest
 public class Case1DempsterShaferServiceTest {
 
@@ -25,6 +26,9 @@ public class Case1DempsterShaferServiceTest {
 
 	@Autowired
 	private SymptomService symtomService;
+
+	@Autowired
+	private SymtomRepository symtomRepository;
 
 	@Test
 	@Transactional
@@ -42,6 +46,8 @@ public class Case1DempsterShaferServiceTest {
 
 		MassFuntion result = dempsterShaferService.calculate(symptoms).getMassFuntion();
 
+		List<Symptom> findAll = symtomRepository.findAll();
+		System.out.println(findAll);
 		for (int i = 0; i < result.getMassDataList().size(); i++) {
 
 			List<MassData> massDataListResult = result.getMassDataList();

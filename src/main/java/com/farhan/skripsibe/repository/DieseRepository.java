@@ -7,8 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.farhan.skripsibe.model.Diese;
-import com.farhan.skripsibe.model.Symptom;
-import java.util.Set;
 
 public interface DieseRepository extends JpaRepository<Diese, Long> {
 	Optional<Diese> findByCode(String code);

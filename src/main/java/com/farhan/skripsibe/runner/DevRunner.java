@@ -1,6 +1,5 @@
 package com.farhan.skripsibe.runner;
 
-import java.io.FileNotFoundException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -12,7 +11,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.support.TransactionTemplate;
 
-import com.farhan.skripsibe.entities.MassFuntion;
 import com.farhan.skripsibe.model.Consultation;
 import com.farhan.skripsibe.model.Diese;
 import com.farhan.skripsibe.model.Role;
@@ -29,16 +27,16 @@ import com.farhan.skripsibe.service.ConsultationService;
 import com.farhan.skripsibe.service.ConverterService;
 import com.farhan.skripsibe.service.DateService;
 import com.farhan.skripsibe.service.DempsterShaferService;
+import com.farhan.skripsibe.service.DempsterShaferService.DempsterShaferObject;
 import com.farhan.skripsibe.service.PdfService;
 import com.farhan.skripsibe.service.SymptomService;
-import com.farhan.skripsibe.service.DempsterShaferService.DempsterShaferObject;
 import com.github.javafaker.Faker;
 
 import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-@Profile({ "dev", "test-dev", "staging" })
+@Profile({ "dev", "test_lele", "staging" })
 public class DevRunner implements CommandLineRunner {
 	private final DieseRepository dieseRepository;
 	private final SymtomRepository symtomRepository;

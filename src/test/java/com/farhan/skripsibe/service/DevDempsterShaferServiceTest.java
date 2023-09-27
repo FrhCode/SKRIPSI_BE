@@ -16,7 +16,7 @@ import com.farhan.skripsibe.entities.MassData;
 import com.farhan.skripsibe.entities.MassFuntion;
 import com.farhan.skripsibe.model.Symptom;
 
-@ActiveProfiles("test-dev")
+@ActiveProfiles("test_lele")
 @SpringBootTest
 public class DevDempsterShaferServiceTest {
 	@Autowired
