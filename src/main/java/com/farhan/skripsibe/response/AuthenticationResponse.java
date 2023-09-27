@@ -1,5 +1,7 @@
 package com.farhan.skripsibe.response;
 
+import java.util.Date;
+
 import com.farhan.skripsibe.model.User;
 
 import lombok.AllArgsConstructor;
@@ -12,6 +14,6 @@ import lombok.NoArgsConstructor;
 public class AuthenticationResponse {
 	private User user;
 	private String jwtToken;
-	private java.util.Date expDate;
+	private Date expires;
 
 }
