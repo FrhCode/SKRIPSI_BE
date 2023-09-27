@@ -1,5 +1,7 @@
 package com.farhan.skripsibe.service;
 
+import java.util.Date;
+
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,6 +15,7 @@ import com.farhan.skripsibe.request.LoginRequest;
 import com.farhan.skripsibe.request.RegisterRequest;
 import com.farhan.skripsibe.response.AuthenticationResponse;
 
+import io.jsonwebtoken.Claims;
 import lombok.*;
 
 @Service
@@ -35,7 +38,8 @@ public class AuthenticationService {
 		user.addRole(role);
 
 		String jwtToken = jwtService.generateToken(user);
-		return new AuthenticationResponse(user, jwtToken);
+		Date expDate = jwtService.extractClaim(jwtToken, Claims::getExpiration);
+		return new AuthenticationResponse(user, jwtToken, expDate);
 	}
 
 	public AuthenticationResponse authenticate(LoginRequest request) {
@@ -47,7 +51,9 @@ public class AuthenticationService {
 
 		String jwtToken = jwtService.generateToken(user);
 
-		return new AuthenticationResponse(user, jwtToken);
+		System.out.println(new Date(System.currentTimeMillis()));
+		Date expDate = jwtService.extractClaim(jwtToken, Claims::getExpiration);
+		return new AuthenticationResponse(user, jwtToken, expDate);
 	}
 
 }

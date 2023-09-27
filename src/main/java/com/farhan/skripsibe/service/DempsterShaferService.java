@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import com.farhan.skripsibe.entities.MassData;
 import com.farhan.skripsibe.entities.MassFuntion;
-import com.farhan.skripsibe.model.Diese;
 import com.farhan.skripsibe.model.Symptom;
 import com.farhan.skripsibe.model.json.ReportJson;
 import com.farhan.skripsibe.model.json.ReportJson.Known;

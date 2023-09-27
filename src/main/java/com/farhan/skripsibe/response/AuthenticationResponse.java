@@ -12,5 +12,6 @@ import lombok.NoArgsConstructor;
 public class AuthenticationResponse {
 	private User user;
 	private String jwtToken;
+	private java.util.Date expDate;
 
 }
