@@ -37,3 +37,5 @@ build/
 src/main/resources/application.properties
 application-prod.properties
 application-staging.properties
+
+*.pdf

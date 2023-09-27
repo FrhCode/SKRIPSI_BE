@@ -95,4 +95,5 @@ public class PlaygoundTest {
 		BigDecimal value = massDataValue.divide(denominator, 6, RoundingMode.HALF_UP);
 		System.out.println(value);
 	}
+
 }

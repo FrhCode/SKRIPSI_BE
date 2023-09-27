@@ -63,7 +63,7 @@ public class DevRunner implements CommandLineRunner {
 
 		generateSolution();
 
-		for (int i = 0; i < 500; i++) {
+		for (int i = 0; i < 3; i++) {
 			generateConsultation();
 		}
 

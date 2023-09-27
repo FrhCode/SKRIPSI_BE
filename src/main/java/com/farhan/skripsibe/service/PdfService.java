@@ -52,23 +52,14 @@ public class PdfService {
 
 		document.add(new AreaBreak(AreaBreakType.NEXT_PAGE));
 
-		int iteration = 4;
-		for (int i = 0; i < iteration; i++) {
-			List<MassData> combination = List.of(new MassData(null, null),
-					new MassData(List.of("P001", "P002", "P003"), BigDecimal.valueOf(.20)),
-					new MassData(List.of(), BigDecimal.valueOf(.80)),
-					new MassData(List.of("P001", "P002", "P003"), BigDecimal.valueOf(.10)),
-					new MassData(List.of("P001", "P002", "P003"), BigDecimal.valueOf(.02)),
-					new MassData(List.of("P001", "P002", "P003"), BigDecimal.valueOf(.08)),
-					new MassData(List.of(), BigDecimal.valueOf(.90)),
-					new MassData(List.of("P001", "P002", "P003"), BigDecimal.valueOf(.18)),
-					new MassData(List.of(), BigDecimal.valueOf(.72))
+		for (int i = 0; i < report.getCalculationData().size(); i++) {
+			List<ReportJson.MassData> combination = report.getCalculationData().get(i);
 
-			);
+			List<String> mCombinationList = report.getMCombinationList().get(i);
 
-			getMCombinationList(document, combination);
+			getMCombinationList(document, combination, mCombinationList);
 
-			boolean isNotLastPage = i < iteration - 1;
+			boolean isNotLastPage = i < report.getCalculationData().size() - 1;
 
 			if (isNotLastPage) {
 				document.add(new AreaBreak(AreaBreakType.NEXT_PAGE));
@@ -78,14 +69,15 @@ public class PdfService {
 		document.close();
 	}
 
-	private void getMCombinationList(Document document, List<MassData> combination) {
+	private void getMCombinationList(Document document, List<ReportJson.MassData> combination,
+			List<String> mCombinationList) {
 		document.add(new Paragraph());
 		document.add(new Paragraph("o = Nilai plausability (1 - belief)"));
 
 		Table tableCombination = new Table(3);
 		tableCombination.setWidth(UnitValue.createPercentValue(100));
 
-		for (MassData massData : combination) {
+		for (ReportJson.MassData massData : combination) {
 			boolean isFirstIndex = massData.getDieses() == null && massData.getDieses() == null;
 			if (isFirstIndex) {
 				tableCombination.addCell(new Cell().add(new Paragraph("")));
@@ -95,22 +87,25 @@ public class PdfService {
 				tableValue.setWidth(UnitValue.createPercentValue(100));
 
 				List<String> dieses = massData.getDieses();
-				BigDecimal value = massData.getValue();
+				String value = massData.getValue();
 
 				boolean isTeta = dieses.size() == 0;
+				boolean isNointersection = dieses.contains("empty");
 				if (isTeta) {
 					tableValue.addCell(
 							new Cell().add(new Paragraph("o")).setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER));
+				} else if (isNointersection) {
+					tableValue
+							.addCell(new Cell().add(new Paragraph("{}")).setTextAlignment(TextAlignment.CENTER)
+									.setBorder(Border.NO_BORDER));
 				} else {
 					tableValue
 							.addCell(new Cell().add(new Paragraph(String.join(", ", dieses))).setTextAlignment(TextAlignment.CENTER)
 									.setBorder(Border.NO_BORDER));
+
 				}
 
-				BigDecimal bigDecimalValue = value.setScale(2, RoundingMode.HALF_UP);
-				String valueWith4Precision = bigDecimalValue.toString();
-
-				tableValue.addCell(new Cell().add(new Paragraph(valueWith4Precision)).setBorder(Border.NO_BORDER));
+				tableValue.addCell(new Cell().add(new Paragraph(value)).setBorder(Border.NO_BORDER));
 
 				tableCombination.addCell(new Cell().add(tableValue).setTextAlignment(TextAlignment.CENTER))
 						.setTextAlignment(TextAlignment.CENTER);
@@ -124,14 +119,6 @@ public class PdfService {
 		document.add(new Paragraph("Mx").setFontSize(13));
 
 		Table tableMCombination = new Table(new float[] { 200f, 50f });
-
-		List<String> mCombinationList = List.of(
-				"P001, P002, P003",
-				"0.04",
-				"o",
-				"0.4"
-
-		);
 
 		for (String mCombination : mCombinationList) {
 			tableMCombination.addCell(new Cell().add(new Paragraph(mCombination)).setBorder(Border.NO_BORDER));

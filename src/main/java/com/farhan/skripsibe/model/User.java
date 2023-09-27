@@ -1,19 +1,32 @@
 package com.farhan.skripsibe.model;
 
-import jakarta.persistence.*;
-import lombok.*;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
-import org.springframework.security.config.core.GrantedAuthorityDefaults;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Index;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Data
 @AllArgsConstructor
@@ -43,7 +56,7 @@ public class User implements UserDetails {
 	@JsonIgnore
 	private String password;
 
-	@ManyToMany(cascade = { CascadeType.PERSIST })
+	@ManyToMany(cascade = { CascadeType.PERSIST }, fetch = FetchType.EAGER)
 	@JoinTable(joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "role_id") })
 	@Setter(AccessLevel.NONE)
