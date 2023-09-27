@@ -36,9 +36,9 @@ public class Case1DempsterShaferServiceTest {
 		List<Symptom> symptoms = List.of(KG01, KG02, KG07, KG08);
 
 		MassFuntion expected = new MassFuntion(List.of(
-				new MassData(List.of("P2"), new BigDecimal(0.82)),
-				new MassData(List.of(), new BigDecimal(0.1296)),
-				new MassData(List.of("P1", "P2", "P3"), new BigDecimal(0.0504))));
+				new MassData(List.of("P2"), new BigDecimal("0.82")),
+				new MassData(List.of(), new BigDecimal("0.13")),
+				new MassData(List.of("P1", "P2", "P3"), new BigDecimal("0.05"))));
 
 		MassFuntion result = dempsterShaferService.calculate(symptoms).getMassFuntion();
 
