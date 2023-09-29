@@ -27,6 +27,7 @@ public class SecurityConfiguration {
 						.requestMatchers("/api/v1/auth/**").permitAll()
 						.requestMatchers(HttpMethod.GET, "/api/v1/symptoms/all").permitAll()
 						.requestMatchers(HttpMethod.GET, "/api/v1/consultations/*").permitAll()
+						.requestMatchers(HttpMethod.GET, "/api/v1/consultations/*/download").permitAll()
 						.anyRequest().authenticated())
 				.sessionManagement(session -> session
 						.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

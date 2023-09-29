@@ -1,13 +1,19 @@
 package com.farhan.skripsibe.controller;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,9 +21,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.farhan.skripsibe.model.Consultation;
+import com.farhan.skripsibe.repository.ConsultationRepository;
 import com.farhan.skripsibe.request.PaginateConsultationRequest;
 import com.farhan.skripsibe.response.BaseResponse;
 import com.farhan.skripsibe.service.ConsultationService;
+import com.farhan.skripsibe.service.PdfService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -26,10 +34,27 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ConsultationController {
 	private final ConsultationService consultationService;
+	private final PdfService pdfService;
+	private final ConsultationRepository consultationRepository;
 
-	@GetMapping("{invoiceNumber}")
-	public Consultation find(@PathVariable String invoiceNumber) {
-		return consultationService.findByinvoice(invoiceNumber);
+	@GetMapping("{consultationInvoice}")
+	public Consultation find(@PathVariable String consultationInvoice) {
+		return consultationService.findByinvoice(consultationInvoice);
+	}
+
+	@GetMapping("{consultationInvoice}/download")
+	public ResponseEntity<Resource> donwloadReport(@PathVariable String consultationInvoice)
+			throws FileNotFoundException {
+		Consultation consultation = consultationRepository.findByinvoice(consultationInvoice).get();
+		String generateConsultationReport = pdfService.generateConsultationReport(consultation.getReport());
+
+		File file = new File(generateConsultationReport);
+		Resource resource = new FileSystemResource(file);
+
+		return ResponseEntity.ok()
+				.header(HttpHeaders.CONTENT_DISPOSITION,
+						"attachment; filename=\"" + consultation.getInvoice() + "\"")
+				.body(resource);
 	}
 
 	@GetMapping("count")

@@ -21,8 +21,8 @@ import com.itextpdf.layout.properties.UnitValue;
 
 @Service
 public class PdfService {
-	public void generateConsultationReport(ReportJson report) throws FileNotFoundException {
-		PdfWriter writer = new PdfWriter(report.getName());
+	public String generateConsultationReport(ReportJson report) throws FileNotFoundException {
+		PdfWriter writer = new PdfWriter("src/main/resources/consultation-report/" + report.getName());
 
 		// Create a PdfDocument object
 		PdfDocument pdf = new PdfDocument(writer);
@@ -64,6 +64,8 @@ public class PdfService {
 		}
 
 		document.close();
+
+		return "src/main/resources/consultation-report/" + report.getName();
 	}
 
 	private void getMCombinationList(Document document, List<ReportJson.MassData> combination,

@@ -28,7 +28,6 @@ import com.farhan.skripsibe.service.ConverterService;
 import com.farhan.skripsibe.service.DateService;
 import com.farhan.skripsibe.service.DempsterShaferService;
 import com.farhan.skripsibe.service.DempsterShaferService.DempsterShaferObject;
-import com.farhan.skripsibe.service.PdfService;
 import com.farhan.skripsibe.service.SymptomService;
 import com.github.javafaker.Faker;
 
