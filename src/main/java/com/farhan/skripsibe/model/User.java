@@ -41,7 +41,7 @@ public class User implements UserDetails {
 	private Long id;
 
 	@Column(nullable = false)
-	private String username;
+	private String name;
 
 	@Column(nullable = false)
 	private String email;

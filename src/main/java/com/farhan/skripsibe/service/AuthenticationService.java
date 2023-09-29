@@ -32,7 +32,7 @@ public class AuthenticationService {
 		user.setEmail(request.getEmail());
 		user.setPassword(passwordEncoder.encode(request.getPassword()));
 		user.setPhoneNumber(null);
-		user.setUsername(request.getUsername());
+		user.setName(request.getUsername());
 
 		Role role = roleRepository.findByName("User").get();
 		user.addRole(role);
