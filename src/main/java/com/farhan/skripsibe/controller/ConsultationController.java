@@ -53,7 +53,7 @@ public class ConsultationController {
 
 		return ResponseEntity.ok()
 				.header(HttpHeaders.CONTENT_DISPOSITION,
-						"attachment; filename=\"" + consultation.getInvoice() + "\"")
+						"attachment; filename=\"" + consultation.getInvoice() + ".pdf" + "\"")
 				.body(resource);
 	}
 
