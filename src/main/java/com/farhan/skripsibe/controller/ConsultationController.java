@@ -13,6 +13,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -51,9 +52,12 @@ public class ConsultationController {
 		File file = new File(generateConsultationReport);
 		Resource resource = new FileSystemResource(file);
 
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentDispositionFormData("filename", consultation.getInvoice() + ".pdf");
+		headers.setContentType(MediaType.APPLICATION_PDF);
+
 		return ResponseEntity.ok()
-				.header(HttpHeaders.CONTENT_DISPOSITION,
-						"attachment; filename=\"" + consultation.getInvoice() + ".pdf" + "\"")
+				.headers(headers)
 				.body(resource);
 	}
 
