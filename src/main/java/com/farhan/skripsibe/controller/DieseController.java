@@ -1,5 +1,6 @@
 package com.farhan.skripsibe.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,7 @@ import com.farhan.skripsibe.repository.DieseRepository;
 import com.farhan.skripsibe.repository.SymtomRepository;
 import com.farhan.skripsibe.request.AddSymptomsRequest;
 import com.farhan.skripsibe.request.PaginateDieseRequest;
+import com.farhan.skripsibe.response.BaseResponse;
 import com.farhan.skripsibe.service.DieseService;
 import com.farhan.skripsibe.service.SymptomService;
 
@@ -53,19 +55,15 @@ public class DieseController {
 	}
 
 	@GetMapping("{code}/symptoms")
-	public Map<String, Object> getSymtoms(@PathVariable String code) {
+	public BaseResponse<Symptom> getSymtoms(@PathVariable String code) {
 		Set<Symptom> symptoms = dieseService.getSymtoms(code);
-		Map<String, Object> response = new HashMap<>();
-		response.put("data", symptoms);
-		return response;
+		return new BaseResponse<Symptom>(new ArrayList<>(symptoms));
 	}
 
 	@GetMapping("{code}/solutions")
-	public Map<String, Object> getSolution(@PathVariable String code) {
+	public BaseResponse<Solution> getSolution(@PathVariable String code) {
 		List<Solution> solutions = dieseRepository.findByCode(code).orElseThrow().getSolutions();
-		Map<String, Object> response = new HashMap<>();
-		response.put("data", solutions);
-		return response;
+		return new BaseResponse<Solution>(solutions);
 	}
 
 	@PutMapping("{code}/symptoms/add")

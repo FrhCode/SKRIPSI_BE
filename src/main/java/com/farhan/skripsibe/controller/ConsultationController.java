@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.farhan.skripsibe.model.Consultation;
 import com.farhan.skripsibe.request.PaginateConsultationRequest;
-import com.farhan.skripsibe.response.GetAllResponse;
+import com.farhan.skripsibe.response.BaseResponse;
 import com.farhan.skripsibe.service.ConsultationService;
 
 import lombok.RequiredArgsConstructor;
@@ -41,7 +41,7 @@ public class ConsultationController {
 	}
 
 	@GetMapping("all")
-	public GetAllResponse<Consultation> all(@RequestParam(required = false) Optional<Integer> size) {
+	public BaseResponse<Consultation> all(@RequestParam(required = false) Optional<Integer> size) {
 		List<Consultation> consultations = new ArrayList<>();
 		if (size.isPresent()) {
 			consultations = consultationService.findAll(PageRequest.of(0, size.get()));
@@ -49,7 +49,7 @@ public class ConsultationController {
 			consultations = consultationService.findAll();
 		}
 
-		return new GetAllResponse<Consultation>(consultations);
+		return new BaseResponse<Consultation>(consultations);
 	}
 
 	@GetMapping

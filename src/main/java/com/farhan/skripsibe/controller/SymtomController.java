@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.farhan.skripsibe.model.Symptom;
 import com.farhan.skripsibe.request.PaginateSymtomRequest;
 import com.farhan.skripsibe.request.SymtomSearchRequest;
-import com.farhan.skripsibe.response.GetAllResponse;
+import com.farhan.skripsibe.response.BaseResponse;
 import com.farhan.skripsibe.service.SymptomService;
 
 import lombok.RequiredArgsConstructor;
@@ -24,9 +24,9 @@ public class SymtomController {
 	private final SymptomService symtomService;
 
 	@GetMapping("all")
-	public GetAllResponse<Symptom> findAll() {
+	public BaseResponse<Symptom> findAll() {
 		List<Symptom> symptoms = symtomService.findAll();
-		return new GetAllResponse<Symptom>(symptoms);
+		return new BaseResponse<Symptom>(symptoms);
 	}
 
 	@GetMapping("search")

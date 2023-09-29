@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetAllResponse<T> {
+public class BaseResponse<T> {
 	private List<T> content;
 }
