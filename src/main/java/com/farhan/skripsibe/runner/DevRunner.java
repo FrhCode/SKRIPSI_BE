@@ -48,7 +48,6 @@ public class DevRunner implements CommandLineRunner {
 	private final DempsterShaferService dempsterShaferService;
 	private final SymptomService symptomService;
 	private final ConverterService converterService;
-	private final PdfService pdfService;
 	private final TransactionTemplate transactionTemplate;
 
 	@Override
@@ -103,8 +102,6 @@ public class DevRunner implements CommandLineRunner {
 
 				Consultation consultation = new Consultation(null, null, name, randomDateTime, consultationResults,
 						symtomJsonsList, result.getReport());
-
-				pdfService.generateConsultationReport(result.getReport());
 
 				consultationService.save(consultation);
 				return null;
