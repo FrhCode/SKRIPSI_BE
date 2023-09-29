@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import com.farhan.skripsibe.model.Solution;
 
 public interface SolutionRepository extends JpaRepository<Solution, Long> {
-	@Query("SELECT s from Solution s where s.diese.id = ?1")
-	List<Solution> findByDieseId(Long diese_id);
+	@Query("SELECT s from Solution s where s.diese.id = :id")
+	List<Solution> findByDieseId(Long id);
 
 }

@@ -82,9 +82,9 @@ public class DevRunner implements CommandLineRunner {
 
 		transactionTemplate.execute(transactionStatus -> {
 			try {
-				List<Symptom> symtoms = symptomService.getRandomData(4, 8);
+				List<Symptom> symptoms = symptomService.getRandomData(4, 8);
 
-				DempsterShaferObject result = dempsterShaferService.calculate(symtoms);
+				DempsterShaferObject result = dempsterShaferService.calculate(symptoms);
 
 				LocalDateTime start = LocalDateTime.of(2023, 1, 1, 0, 0);
 				LocalDateTime end = LocalDateTime.of(2023, 12, 31, 23, 59);
@@ -94,12 +94,15 @@ public class DevRunner implements CommandLineRunner {
 				Faker faker = new Faker(new Locale("in-ID"));
 
 				String name = faker.name().fullName();
+				String address = faker.address().fullAddress();
+				String phoneNumber = faker.phoneNumber().phoneNumber();
 
 				List<ResultJson> consultationResults = converterService.massFuntionToResultJsonList(result.getMassFuntion());
 
-				List<SymtomJson> symtomJsonsList = converterService.symptomsTosymtomJsonList(symtoms);
+				List<SymtomJson> symtomJsonsList = converterService.symptomsTosymtomJsonList(symptoms);
 
-				Consultation consultation = new Consultation(null, null, name, randomDateTime, consultationResults,
+				Consultation consultation = new Consultation(null, null, name, randomDateTime, address, phoneNumber,
+						consultationResults,
 						symtomJsonsList, result.getReport());
 
 				consultationService.save(consultation);

@@ -11,7 +11,7 @@ import com.farhan.skripsibe.model.Diese;
 public interface DieseRepository extends JpaRepository<Diese, Long> {
 	Optional<Diese> findByCode(String code);
 
-	@Query("SELECT DISTINCT d from Diese d JOIN d.symptoms s WHERE s.code = ?1")
+	@Query("SELECT DISTINCT d from Diese d JOIN d.symptoms s WHERE s.code = :code")
 	List<Diese> findBySymptomCode(String code);
 
 	long count();

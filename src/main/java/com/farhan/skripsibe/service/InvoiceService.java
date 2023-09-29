@@ -35,4 +35,8 @@ public class InvoiceService {
 
 		return invoiceNumber;
 	}
+
+	public String generateInvoiceNumber() {
+		return generateInvoiceNumber(LocalDateTime.now());
+	}
 }

@@ -17,17 +17,21 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.farhan.skripsibe.model.Consultation;
 import com.farhan.skripsibe.repository.ConsultationRepository;
+import com.farhan.skripsibe.request.ConsultationRequest;
 import com.farhan.skripsibe.request.PaginateConsultationRequest;
 import com.farhan.skripsibe.response.BaseResponse;
 import com.farhan.skripsibe.service.ConsultationService;
 import com.farhan.skripsibe.service.PdfService;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -84,5 +88,13 @@ public class ConsultationController {
 	@GetMapping
 	public Page<Consultation> paginate(PaginateConsultationRequest consultationPaginateRequest) {
 		return consultationService.paginate(consultationPaginateRequest);
+	}
+
+	@PostMapping
+	public Map<String, String> create(@Valid @RequestBody ConsultationRequest consultationRequest) {
+		Consultation consultation = consultationService.save(consultationRequest);
+		Map<String, String> response = new HashMap<>();
+		response.put("invoice", consultation.getInvoice());
+		return response;
 	}
 }

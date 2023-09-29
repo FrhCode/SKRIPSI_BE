@@ -44,6 +44,12 @@ public class Consultation {
 	@Column(name = "tanggal konsultasi", nullable = false)
 	private LocalDateTime invoiceDate;
 
+	@Column(name = "alamat", nullable = false)
+	private String address;
+
+	@Column(name = "nomor telepon", nullable = false)
+	private String phoneNumber;
+
 	@Convert(converter = ResultJsonConverter.class)
 	@Column(columnDefinition = "TEXT", name = "hasil diagnosa", nullable = false)
 	private List<ResultJson> results;
