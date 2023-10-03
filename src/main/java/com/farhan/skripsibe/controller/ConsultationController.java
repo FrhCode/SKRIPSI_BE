@@ -57,7 +57,7 @@ public class ConsultationController {
 		Resource resource = new FileSystemResource(file);
 
 		HttpHeaders headers = new HttpHeaders();
-		headers.setContentDispositionFormData("filename", consultation.getInvoice() + ".pdf");
+		headers.setContentDispositionFormData("inline", consultation.getInvoice() + ".pdf");
 		headers.setContentType(MediaType.APPLICATION_PDF);
 
 		return ResponseEntity.ok()
