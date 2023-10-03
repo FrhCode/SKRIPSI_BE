@@ -58,7 +58,7 @@ public class ConsultationController {
 		Resource resource = new FileSystemResource(file);
 
 		ContentDisposition contentDisposition = ContentDisposition.builder("inline")
-				.filename("Filename")
+				.filename(consultation.getInvoice() + ".pdf")
 				.build();
 
 		HttpHeaders headers = new HttpHeaders();
