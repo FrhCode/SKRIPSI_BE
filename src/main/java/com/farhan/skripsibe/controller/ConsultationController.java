@@ -12,6 +12,7 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -56,8 +57,12 @@ public class ConsultationController {
 		File file = new File(generateConsultationReport);
 		Resource resource = new FileSystemResource(file);
 
+		ContentDisposition contentDisposition = ContentDisposition.builder("inline")
+				.filename("Filename")
+				.build();
+
 		HttpHeaders headers = new HttpHeaders();
-		headers.setContentDispositionFormData("inline", consultation.getInvoice() + ".pdf");
+		headers.setContentDispositionFormData(contentDisposition);
 		headers.setContentType(MediaType.APPLICATION_PDF);
 
 		return ResponseEntity.ok()
