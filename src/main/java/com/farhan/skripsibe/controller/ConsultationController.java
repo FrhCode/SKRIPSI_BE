@@ -62,7 +62,7 @@ public class ConsultationController {
 				.build();
 
 		HttpHeaders headers = new HttpHeaders();
-		headers.setContentDispositionFormData(contentDisposition);
+		headers.setContentDisposition(contentDisposition);
 		headers.setContentType(MediaType.APPLICATION_PDF);
 
 		return ResponseEntity.ok()
