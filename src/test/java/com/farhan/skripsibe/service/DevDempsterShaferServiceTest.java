@@ -28,14 +28,14 @@ public class DevDempsterShaferServiceTest {
 	@Test
 	@Transactional
 	void case1() {
-		Symptom KG19 = symtomService.findByCode("KG19").get();
-		Symptom KG20 = symtomService.findByCode("KG20").get();
-		List<Symptom> symptoms = List.of(KG19, KG20);
+		Symptom SC19 = symtomService.findByCode("SC19").get();
+		Symptom SC20 = symtomService.findByCode("SC20").get();
+		List<Symptom> symptoms = List.of(SC19, SC20);
 
 		MassFuntion expected = new MassFuntion(List.of(
-				new MassData(List.of("P10"), new BigDecimal("0.9")),
+				new MassData(List.of("D10"), new BigDecimal("0.9")),
 				new MassData(List.of(), new BigDecimal("0.06")),
-				new MassData(List.of("P8", "P9", "P10"), new BigDecimal("0.04"))));
+				new MassData(List.of("D8", "D9", "D10"), new BigDecimal("0.04"))));
 
 		MassFuntion result = dempsterShaferService.calculate(symptoms).getMassFuntion();
 
@@ -59,18 +59,18 @@ public class DevDempsterShaferServiceTest {
 	@Test
 	@Transactional
 	void case2() {
-		Symptom KG01 = symtomService.findByCode("KG01").get();
-		Symptom KG02 = symtomService.findByCode("KG02").get();
-		Symptom KG10 = symtomService.findByCode("KG10").get();
-		Symptom KG17 = symtomService.findByCode("KG17").get();
-		List<Symptom> symptoms = List.of(KG01, KG02, KG10, KG17);
+		Symptom SC01 = symtomService.findByCode("SC01").get();
+		Symptom SC02 = symtomService.findByCode("SC02").get();
+		Symptom SC10 = symtomService.findByCode("SC10").get();
+		Symptom SC17 = symtomService.findByCode("SC17").get();
+		List<Symptom> symptoms = List.of(SC01, SC02, SC10, SC17);
 
 		MassFuntion expected = new MassFuntion(List.of(
 				new MassData(List.of(), new BigDecimal("0.07")),
-				new MassData(List.of("P1", "P2", "P4", "P5"), new BigDecimal("0.03")),
-				new MassData(List.of("P4"), new BigDecimal("0.55")),
-				new MassData(List.of("P8"), new BigDecimal("0.31")),
-				new MassData(List.of("P1", "P4", "P5"), new BigDecimal("0.03"))
+				new MassData(List.of("D1", "D2", "D4", "D5"), new BigDecimal("0.03")),
+				new MassData(List.of("D4"), new BigDecimal("0.55")),
+				new MassData(List.of("D8"), new BigDecimal("0.31")),
+				new MassData(List.of("D1", "D4", "D5"), new BigDecimal("0.03"))
 
 		)
 

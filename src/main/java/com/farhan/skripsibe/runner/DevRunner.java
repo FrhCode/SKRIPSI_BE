@@ -117,17 +117,17 @@ public class DevRunner implements CommandLineRunner {
 	}
 
 	private void generateSolution() {
-		Diese P1 = dieseRepository.findByCode("P1").orElseThrow();
-		Diese P2 = dieseRepository.findByCode("P2").orElseThrow();
-		Diese P3 = dieseRepository.findByCode("P3").orElseThrow();
-		Diese P4 = dieseRepository.findByCode("P4").orElseThrow();
-		Diese P5 = dieseRepository.findByCode("P5").orElseThrow();
-		Diese P6 = dieseRepository.findByCode("P6").orElseThrow();
-		Diese P7 = dieseRepository.findByCode("P7").orElseThrow();
-		Diese P8 = dieseRepository.findByCode("P8").orElseThrow();
-		Diese P9 = dieseRepository.findByCode("P9").orElseThrow();
-		Diese P10 = dieseRepository.findByCode("P10").orElseThrow();
-		Diese P11 = dieseRepository.findByCode("P11").orElseThrow();
+		Diese P1 = dieseRepository.findByCode("D1").orElseThrow();
+		Diese P2 = dieseRepository.findByCode("D2").orElseThrow();
+		Diese P3 = dieseRepository.findByCode("D3").orElseThrow();
+		Diese P4 = dieseRepository.findByCode("D4").orElseThrow();
+		Diese P5 = dieseRepository.findByCode("D5").orElseThrow();
+		Diese P6 = dieseRepository.findByCode("D6").orElseThrow();
+		Diese P7 = dieseRepository.findByCode("D7").orElseThrow();
+		Diese P8 = dieseRepository.findByCode("D8").orElseThrow();
+		Diese P9 = dieseRepository.findByCode("D9").orElseThrow();
+		Diese P10 = dieseRepository.findByCode("D10").orElseThrow();
+		Diese P11 = dieseRepository.findByCode("D11").orElseThrow();
 
 		List<Solution> solutions = List.of(
 				new Solution(null,
@@ -319,75 +319,75 @@ public class DevRunner implements CommandLineRunner {
 	private void generateRuleBase() {
 		transactionTemplate.execute(transactionStatus -> {
 			try {
-				Diese P1 = dieseRepository.findByCode("P1").orElseThrow();
-				P1.addSymptom(symtomRepository.findByCode("KG01").get());
-				P1.addSymptom(symtomRepository.findByCode("KG02").get());
-				P1.addSymptom(symtomRepository.findByCode("KG03").get());
-				P1.addSymptom(symtomRepository.findByCode("KG04").get());
-				P1.addSymptom(symtomRepository.findByCode("KG05").get());
+				Diese P1 = dieseRepository.findByCode("D1").orElseThrow();
+				P1.addSymptom(symtomRepository.findByCode("SC01").get());
+				P1.addSymptom(symtomRepository.findByCode("SC02").get());
+				P1.addSymptom(symtomRepository.findByCode("SC03").get());
+				P1.addSymptom(symtomRepository.findByCode("SC04").get());
+				P1.addSymptom(symtomRepository.findByCode("SC05").get());
 				dieseRepository.save(P1);
 
-				Diese P2 = dieseRepository.findByCode("P2").orElseThrow();
-				P2.addSymptom(symtomRepository.findByCode("KG02").get());
-				P2.addSymptom(symtomRepository.findByCode("KG03").get());
-				P2.addSymptom(symtomRepository.findByCode("KG04").get());
-				P2.addSymptom(symtomRepository.findByCode("KG07").get());
-				P2.addSymptom(symtomRepository.findByCode("KG08").get());
+				Diese P2 = dieseRepository.findByCode("D2").orElseThrow();
+				P2.addSymptom(symtomRepository.findByCode("SC02").get());
+				P2.addSymptom(symtomRepository.findByCode("SC03").get());
+				P2.addSymptom(symtomRepository.findByCode("SC04").get());
+				P2.addSymptom(symtomRepository.findByCode("SC07").get());
+				P2.addSymptom(symtomRepository.findByCode("SC08").get());
 				dieseRepository.save(P2);
 
-				Diese P3 = dieseRepository.findByCode("P3").orElseThrow();
-				P3.addSymptom(symtomRepository.findByCode("KG05").get());
-				P3.addSymptom(symtomRepository.findByCode("KG09").get());
+				Diese P3 = dieseRepository.findByCode("D3").orElseThrow();
+				P3.addSymptom(symtomRepository.findByCode("SC05").get());
+				P3.addSymptom(symtomRepository.findByCode("SC09").get());
 				dieseRepository.save(P3);
 
-				Diese P4 = dieseRepository.findByCode("P4").orElseThrow();
-				P4.addSymptom(symtomRepository.findByCode("KG01").get());
-				P4.addSymptom(symtomRepository.findByCode("KG02").get());
-				P4.addSymptom(symtomRepository.findByCode("KG10").get());
+				Diese P4 = dieseRepository.findByCode("D4").orElseThrow();
+				P4.addSymptom(symtomRepository.findByCode("SC01").get());
+				P4.addSymptom(symtomRepository.findByCode("SC02").get());
+				P4.addSymptom(symtomRepository.findByCode("SC10").get());
 				dieseRepository.save(P4);
 
-				Diese P5 = dieseRepository.findByCode("P5").orElseThrow();
-				P5.addSymptom(symtomRepository.findByCode("KG01").get());
-				P5.addSymptom(symtomRepository.findByCode("KG02").get());
-				P5.addSymptom(symtomRepository.findByCode("KG06").get());
-				P5.addSymptom(symtomRepository.findByCode("KG11").get());
-				P5.addSymptom(symtomRepository.findByCode("KG12").get());
+				Diese P5 = dieseRepository.findByCode("D5").orElseThrow();
+				P5.addSymptom(symtomRepository.findByCode("SC01").get());
+				P5.addSymptom(symtomRepository.findByCode("SC02").get());
+				P5.addSymptom(symtomRepository.findByCode("SC06").get());
+				P5.addSymptom(symtomRepository.findByCode("SC11").get());
+				P5.addSymptom(symtomRepository.findByCode("SC12").get());
 				dieseRepository.save(P5);
 
-				Diese P6 = dieseRepository.findByCode("P6").orElseThrow();
-				P6.addSymptom(symtomRepository.findByCode("KG06").get());
-				P6.addSymptom(symtomRepository.findByCode("KG13").get());
-				P6.addSymptom(symtomRepository.findByCode("KG14").get());
+				Diese P6 = dieseRepository.findByCode("D6").orElseThrow();
+				P6.addSymptom(symtomRepository.findByCode("SC06").get());
+				P6.addSymptom(symtomRepository.findByCode("SC13").get());
+				P6.addSymptom(symtomRepository.findByCode("SC14").get());
 				dieseRepository.save(P6);
 
-				Diese P7 = dieseRepository.findByCode("P7").orElseThrow();
-				P7.addSymptom(symtomRepository.findByCode("KG15").get());
-				P7.addSymptom(symtomRepository.findByCode("KG16").get());
+				Diese P7 = dieseRepository.findByCode("D7").orElseThrow();
+				P7.addSymptom(symtomRepository.findByCode("SC15").get());
+				P7.addSymptom(symtomRepository.findByCode("SC16").get());
 				dieseRepository.save(P7);
 
-				Diese P8 = dieseRepository.findByCode("P8").orElseThrow();
-				P8.addSymptom(symtomRepository.findByCode("KG03").get());
-				P8.addSymptom(symtomRepository.findByCode("KG17").get());
-				P8.addSymptom(symtomRepository.findByCode("KG18").get());
-				P8.addSymptom(symtomRepository.findByCode("KG19").get());
+				Diese P8 = dieseRepository.findByCode("D8").orElseThrow();
+				P8.addSymptom(symtomRepository.findByCode("SC03").get());
+				P8.addSymptom(symtomRepository.findByCode("SC17").get());
+				P8.addSymptom(symtomRepository.findByCode("SC18").get());
+				P8.addSymptom(symtomRepository.findByCode("SC19").get());
 				dieseRepository.save(P8);
 
-				Diese P9 = dieseRepository.findByCode("P9").orElseThrow();
-				P9.addSymptom(symtomRepository.findByCode("KG03").get());
-				P9.addSymptom(symtomRepository.findByCode("KG04").get());
-				P9.addSymptom(symtomRepository.findByCode("KG19").get());
+				Diese P9 = dieseRepository.findByCode("D9").orElseThrow();
+				P9.addSymptom(symtomRepository.findByCode("SC03").get());
+				P9.addSymptom(symtomRepository.findByCode("SC04").get());
+				P9.addSymptom(symtomRepository.findByCode("SC19").get());
 				dieseRepository.save(P9);
 
-				Diese P10 = dieseRepository.findByCode("P10").orElseThrow();
-				P10.addSymptom(symtomRepository.findByCode("KG04").get());
-				P10.addSymptom(symtomRepository.findByCode("KG06").get());
-				P10.addSymptom(symtomRepository.findByCode("KG19").get());
-				P10.addSymptom(symtomRepository.findByCode("KG20").get());
+				Diese P10 = dieseRepository.findByCode("D10").orElseThrow();
+				P10.addSymptom(symtomRepository.findByCode("SC04").get());
+				P10.addSymptom(symtomRepository.findByCode("SC06").get());
+				P10.addSymptom(symtomRepository.findByCode("SC19").get());
+				P10.addSymptom(symtomRepository.findByCode("SC20").get());
 				dieseRepository.save(P10);
 
-				Diese P11 = dieseRepository.findByCode("P11").orElseThrow();
-				P11.addSymptom(symtomRepository.findByCode("KG21").get());
-				P11.addSymptom(symtomRepository.findByCode("KG22").get());
+				Diese P11 = dieseRepository.findByCode("D11").orElseThrow();
+				P11.addSymptom(symtomRepository.findByCode("SC21").get());
+				P11.addSymptom(symtomRepository.findByCode("SC22").get());
 				dieseRepository.save(P11);
 
 				return null;
@@ -400,57 +400,59 @@ public class DevRunner implements CommandLineRunner {
 
 	private void generaSymtom() {
 		List<Symptom> symtoms = List.of(
-				new Symptom(null, "KG01", "Borok pada kulit", BigDecimal.valueOf(.3)),
-				new Symptom(null, "KG02", "Pendarahan pada kulit", BigDecimal.valueOf(.2)),
-				new Symptom(null, "KG03", "Lemah", BigDecimal.valueOf(.2)),
-				new Symptom(null, "KG04", "Kurus", BigDecimal.valueOf(.4)),
-				new Symptom(null, "KG05", "Nafsu makan hilang", BigDecimal.valueOf(.6)),
-				new Symptom(null, "KG06", "Kulit gelap", BigDecimal.valueOf(.2)),
-				new Symptom(null, "KG07", "Kulit kasar", BigDecimal.valueOf(.8)),
-				new Symptom(null, "KG08", "Susah bernafas", BigDecimal.valueOf(.9)),
-				new Symptom(null, "KG09", "Infeksi kulit kepala, badan belakang, insang dan sirip", BigDecimal.valueOf(.8)),
-				new Symptom(null, "KG10", "Pendarahan pada daging", BigDecimal.valueOf(.8)),
-				new Symptom(null, "KG11", "Mata dan tubuh samping menonjol", BigDecimal.valueOf(.9)),
-				new Symptom(null, "KG12", "Luka kecil di kulit, lalu meluas ke daging", BigDecimal.valueOf(.9)),
-				new Symptom(null, "KG13", "Perut membengkak", BigDecimal.valueOf(.6)),
-				new Symptom(null, "KG14", "Hati bercak-bercak", BigDecimal.valueOf(.9)),
-				new Symptom(null, "KG15", "Kepala, tutup insang dan sirip ditumbuhi benang halus seperti kapas",
-						BigDecimal.valueOf(.9)),
-				new Symptom(null, "KG16", "Pada telur diliputi benang seperti kapas", BigDecimal.valueOf(.7)),
-				new Symptom(null, "KG17", "Sering muncul ke permukaan", BigDecimal.valueOf(.8)),
-				new Symptom(null, "KG18", "Timbul bintik putih pada sirip dan insang", BigDecimal.valueOf(.9)),
-				new Symptom(null, "KG19", "Ikan menggesekkan badannya pada benda keras", BigDecimal.valueOf(.4)),
-				new Symptom(null, "KG20", "Sirip rontok", BigDecimal.valueOf(.9)),
-				new Symptom(null, "KG21", "Parasit menempel dan menusukkan diri pada tutup insang, sirip atau mata",
+				new Symptom(null, "SC01", "Luka pada permukaan kulit", BigDecimal.valueOf(.3)),
+				new Symptom(null, "SC02", "Perdarahan di permukaan kulit.", BigDecimal.valueOf(.2)),
+				new Symptom(null, "SC03", "Lemah", BigDecimal.valueOf(.2)),
+				new Symptom(null, "SC04", "Kurus", BigDecimal.valueOf(.4)),
+				new Symptom(null, "SC05", "Selera makan menurun", BigDecimal.valueOf(.6)),
+				new Symptom(null, "SC06", "Kulit terlihat gelap", BigDecimal.valueOf(.2)),
+				new Symptom(null, "SC07", "Kulit terlihat kasar", BigDecimal.valueOf(.8)),
+				new Symptom(null, "SC08", "Kesulitan bernapas", BigDecimal.valueOf(.9)),
+				new Symptom(null, "SC09", "Infeksi pada kulit kepala, bagian belakang tubuh, insang, dan sirip",
 						BigDecimal.valueOf(.8)),
-				new Symptom(null, "KG22", "Bagian tutup insang, sirip atau mata mengalami luka", BigDecimal.valueOf(.8)));
+				new Symptom(null, "SC10", "Perdarahan di dalam daging", BigDecimal.valueOf(.8)),
+				new Symptom(null, "SC11", "Mata dan sisi tubuh tampak menonjol", BigDecimal.valueOf(.9)),
+				new Symptom(null, "SC12", "Luka ringan pada permukaan kulit, kemudian menyebar ke bagian dalam daging",
+						BigDecimal.valueOf(.9)),
+				new Symptom(null, "SC13", "Perut terlihat bengkak", BigDecimal.valueOf(.6)),
+				new Symptom(null, "SC14", "Hati berbintik-bintik", BigDecimal.valueOf(.9)),
+				new Symptom(null, "SC15", "Kepala, sirip, dan tutup insang diliputi oleh filamen yang menyerupai kapas",
+						BigDecimal.valueOf(.9)),
+				new Symptom(null, "SC16", "Benang seperti kapas melingkupi telur", BigDecimal.valueOf(.7)),
+				new Symptom(null, "SC17", "Sering naik ke permukaan", BigDecimal.valueOf(.8)),
+				new Symptom(null, "SC18", "Muncul bercak putih pada sirip dan insang", BigDecimal.valueOf(.9)),
+				new Symptom(null, "SC19", "Ikan menggosokkan tubuhnya pada permukaan yang keras", BigDecimal.valueOf(.4)),
+				new Symptom(null, "SC20", "Sirip mengalami kerontokan", BigDecimal.valueOf(.9)),
+				new Symptom(null, "SC21", "Parasit melekat dan menembus tutup insang, sirip, atau mata",
+						BigDecimal.valueOf(.8)),
+				new Symptom(null, "SC22", "Tutup insang, sirip, atau mata mengalami luka", BigDecimal.valueOf(.8)));
 
 		symtomRepository.saveAll(symtoms);
 	}
 
 	private void generateDieses() {
 		List<Diese> dieses = List.of(
-				new Diese(null, "P1", "Pseudomonas hydrophila",
+				new Diese(null, "D1", "Pseudomonas hydrophila",
 						"Penyakit Pseudomonas hydrophila, juga dikenal sebagai penyakit aeromonas atau septicemia hemoragik, adalah penyakit infeksi bakteri yang serius pada ikan air tawar. Penyakit ini disebabkan oleh bakteri Pseudomonas hydrophila atau Aeromonas hydrophila."),
-				new Diese(null, "P2", "Aeromonas hydrophila",
+				new Diese(null, "D2", "Aeromonas hydrophila",
 						"Penyakit Aeromonas hydrophila, juga dikenal sebagai Aeromonas septicemia, adalah infeksi bakteri yang dapat mempengaruhi ikan air tawar dan laut. Aeromonas hydrophila adalah bakteri Gram-negatif yang dapat menyebabkan berbagai gejala pada ikan."),
-				new Diese(null, "P3", "Aeromonas punctata",
+				new Diese(null, "D3", "Aeromonas punctata",
 						"Aeromonas punctata adalah salah satu spesies bakteri dari genus Aeromonas. Bakteri ini dapat dengan cepat menjalar dan dapat menyebabkan kematian mendadak dengan kemungkinan yang tinggi."),
-				new Diese(null, "P4", "Columnaris",
+				new Diese(null, "D4", "Columnaris",
 						"Columnaris adalah infeksi bakteri pada ikan yang mempengaruhi kulit, insang, dan sirip. penyakit ini dapat menyebar dengan cepat dan dapat menyebabkan kematian mendadak dengan kemungkinan yang tinggi."),
-				new Diese(null, "P5", "Edwardsiella",
+				new Diese(null, "D5", "Edwardsiella",
 						"Edwardsiella adalah bakteri yang bisa ditemukan di air tawar, air limbah, dan hewan. Bakteri ini dapat menyebabkan infeksi pada ikan dan hewan lainnya seperti reptil, amfibi, dan mamalia."),
-				new Diese(null, "P6", "Tuberculosis",
+				new Diese(null, "D6", "Tuberculosis",
 						"Penyakit tuberkulosis pada ikan disebabkan oleh bakteri Mycobacterium spp., terutama Mycobacterium marinum dan Mycobacterium fortuitum. Penyakit ini sering disebut sebagai 'fish tuberculosis' atau 'fish TB'. Tuberkulosis pada ikan dapat menyerang berbagai jenis ikan air tawar dan air laut."),
-				new Diese(null, "P7", "Jamur putih",
+				new Diese(null, "D7", "Jamur putih",
 						"Penyakit jamur putih pada ikan, juga dikenal sebagai saprolegniasis, disebabkan oleh jamur dari genus Saproglena atau Achyla. Jamur ini merupakan organisme eukariotik bersel tunggal yang dapat menginfeksi ikan dan organisme air lainnya. Saprolegniasis biasanya muncul pada ikan yang mengalami luka atau stres, dan jamur tersebut memanfaatkan situasi tersebut untuk menyerang jaringan ikan."),
-				new Diese(null, "P8", "Bintik putih (White spot)",
+				new Diese(null, "D8", "Bintik putih (White spot)",
 						"Bintik putih pada ikan merupakan gejala dari penyakit yang disebut 'Ichthyophthirius multifiliis,' yang lebih dikenal sebagai 'Ikan Putih' atau 'White Spot Disease' dalam bahasa Inggris. Ini adalah salah satu penyakit ikan air tawar paling umum dan dapat sangat merugikan bagi populasi ikan dalam akuarium atau kolam."),
-				new Diese(null, "P9", "Gatal",
+				new Diese(null, "D9", "Gatal",
 						"Penyakit gatal pada ikan adalah kondisi medis di mana ikan mengalami iritasi atau ketidaknyamanan pada kulit atau selaput lendirnya. Hal ini dapat disebabkan oleh berbagai faktor, termasuk infeksi bakteri, jamur, protozoa, atau parasit."),
-				new Diese(null, "P10", "Trematoda",
+				new Diese(null, "D10", "Trematoda",
 						"Penyakit Trematoda pada ikan disebabkan oleh cacing pipih parasitik dari kelas Trematoda. Cacing-cacing ini juga dikenal sebagai fluke. Mereka memiliki siklus hidup kompleks yang melibatkan dua atau lebih inang selama fase perkembangan mereka."),
-				new Diese(null, "P11", "Lernaea sp",
+				new Diese(null, "D11", "Lernaea sp",
 						"Lernaea, juga dikenal sebagai 'cacing benang ikan,' adalah parasit yang dapat mempengaruhi ikan air tawar dan air asin. Parasit ini termasuk dalam kelompok copepod (krustasea mikroskopis) dan umumnya dikenal dengan nama 'anchor worm' karena bentuknya yang menyerupai jangkar."));
 
 		dieseRepository.saveAll(dieses);
