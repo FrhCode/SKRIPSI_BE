@@ -401,7 +401,7 @@ public class DevRunner implements CommandLineRunner {
 	private void generaSymtom() {
 		List<Symptom> symtoms = List.of(
 				new Symptom(null, "SC01", "Luka pada permukaan kulit", BigDecimal.valueOf(.3)),
-				new Symptom(null, "SC02", "Perdarahan di permukaan kulit.", BigDecimal.valueOf(.2)),
+				new Symptom(null, "SC02", "Pendarahan di permukaan kulit.", BigDecimal.valueOf(.2)),
 				new Symptom(null, "SC03", "Lemah", BigDecimal.valueOf(.2)),
 				new Symptom(null, "SC04", "Kurus", BigDecimal.valueOf(.4)),
 				new Symptom(null, "SC05", "Selera makan menurun", BigDecimal.valueOf(.6)),
@@ -410,7 +410,7 @@ public class DevRunner implements CommandLineRunner {
 				new Symptom(null, "SC08", "Kesulitan bernapas", BigDecimal.valueOf(.9)),
 				new Symptom(null, "SC09", "Infeksi pada kulit kepala, bagian belakang tubuh, insang, dan sirip",
 						BigDecimal.valueOf(.8)),
-				new Symptom(null, "SC10", "Perdarahan di dalam daging", BigDecimal.valueOf(.8)),
+				new Symptom(null, "SC10", "Pendarahan di dalam daging", BigDecimal.valueOf(.8)),
 				new Symptom(null, "SC11", "Mata dan sisi tubuh tampak menonjol", BigDecimal.valueOf(.9)),
 				new Symptom(null, "SC12", "Luka ringan pada permukaan kulit, kemudian menyebar ke bagian dalam daging",
 						BigDecimal.valueOf(.9)),
