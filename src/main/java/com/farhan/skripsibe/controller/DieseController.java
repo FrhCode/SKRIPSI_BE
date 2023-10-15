@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.farhan.skripsibe.exception.BadRequestException;
 import com.farhan.skripsibe.model.Diese;
 import com.farhan.skripsibe.model.Solution;
 import com.farhan.skripsibe.model.Symptom;
@@ -27,7 +26,6 @@ import com.farhan.skripsibe.request.AddSymptomsRequest;
 import com.farhan.skripsibe.request.PaginateDieseRequest;
 import com.farhan.skripsibe.response.BaseResponse;
 import com.farhan.skripsibe.service.DieseService;
-import com.farhan.skripsibe.service.SymptomService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -37,7 +35,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class DieseController {
 	private final DieseService dieseService;
-	private final SymptomService symtomService;
 	private final DieseRepository dieseRepository;
 	private final SymtomRepository symtomRepository;
 
@@ -72,25 +69,11 @@ public class DieseController {
 			@PathVariable String code) {
 		List<String> symptomsCode = addSymptomsRequest.getSymptomsCode();
 
-		boolean isValid = symtomService.checkSymptomsCodeValid(symptomsCode);
+		Diese diese = dieseRepository.findByCode(code).orElseThrow();
 
-		if (!isValid) {
-			Map<String, String> errors = new HashMap<>();
-			errors.put("symptomsCode", "invalid symptomsCode");
+		diese.addSymptom(symtomRepository.findByCode(symptomsCode.get(0)).get());
 
-			BadRequestException responseBody = new BadRequestException(errors);
-
-			System.out.println(responseBody);
-
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseBody.getResponseBody());
-
-		}
-
-		Diese P1 = dieseRepository.findByCode(code).orElseThrow();
-
-		P1.addSymptom(symtomRepository.findByCode(symptomsCode.get(0)).get());
-
-		dieseRepository.save(P1);
+		dieseRepository.save(diese);
 
 		Map<String, String> response = new HashMap<>();
 		response.put("status", "created");

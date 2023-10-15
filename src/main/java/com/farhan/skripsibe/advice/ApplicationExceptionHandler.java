@@ -27,7 +27,7 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 		});
 
 		BadRequestException badRequestException = new BadRequestException(errors);
-		return new ResponseEntity<>(badRequestException, HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(badRequestException.getResponseBody(), HttpStatus.BAD_REQUEST);
 	}
 
 }

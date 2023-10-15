@@ -35,7 +35,7 @@ import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-@Profile({ "dev", "test_lele", "staging" })
+@Profile({ "dev", "test_lele", "staging", "default" })
 public class DevRunner implements CommandLineRunner {
 	private final DieseRepository dieseRepository;
 	private final SymtomRepository symtomRepository;
