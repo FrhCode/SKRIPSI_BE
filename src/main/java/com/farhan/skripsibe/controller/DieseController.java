@@ -22,6 +22,7 @@ import com.farhan.skripsibe.model.Solution;
 import com.farhan.skripsibe.model.Symptom;
 import com.farhan.skripsibe.repository.DieseRepository;
 import com.farhan.skripsibe.repository.SymtomRepository;
+import com.farhan.skripsibe.request.AddSolutionsRequest;
 import com.farhan.skripsibe.request.AddSymptomsRequest;
 import com.farhan.skripsibe.request.PaginateDieseRequest;
 import com.farhan.skripsibe.response.BaseResponse;
@@ -95,5 +96,11 @@ public class DieseController {
 		response.put("status", "created");
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);
+	}
+
+	@PutMapping("{code}/symptoms/add")
+	public ResponseEntity<Object> addSolution(@Valid @RequestBody AddSolutionsRequest addSolutionsRequest,
+			@PathVariable String code) {
+		return null;
 	}
 }
