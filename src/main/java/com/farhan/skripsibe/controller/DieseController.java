@@ -20,6 +20,7 @@ import com.farhan.skripsibe.model.Diese;
 import com.farhan.skripsibe.model.Solution;
 import com.farhan.skripsibe.model.Symptom;
 import com.farhan.skripsibe.repository.DieseRepository;
+import com.farhan.skripsibe.repository.SolutionRepository;
 import com.farhan.skripsibe.repository.SymtomRepository;
 import com.farhan.skripsibe.request.AddSolutionsRequest;
 import com.farhan.skripsibe.request.AddSymptomsRequest;
@@ -37,6 +38,7 @@ public class DieseController {
 	private final DieseService dieseService;
 	private final DieseRepository dieseRepository;
 	private final SymtomRepository symtomRepository;
+	private final SolutionRepository solutionRepository;
 
 	@GetMapping("count")
 	public Map<String, Object> count() {
@@ -84,6 +86,13 @@ public class DieseController {
 	@PutMapping("{code}/solutions/add")
 	public ResponseEntity<Object> addSolution(@Valid @RequestBody AddSolutionsRequest addSolutionsRequest,
 			@PathVariable String code) {
-		return null;
+
+		solutionRepository.save(new Solution(null, addSolutionsRequest.getName(), addSolutionsRequest.getDescription(),
+				dieseRepository.findByCode(code).get()));
+
+		Map<String, String> response = new HashMap<>();
+		response.put("status", "created");
+
+		return ResponseEntity.status(HttpStatus.CREATED).body(response);
 	}
 }
