@@ -98,7 +98,7 @@ public class DieseController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);
 	}
 
-	@PutMapping("{code}/symptoms/add")
+	@PutMapping("{code}/solutions/add")
 	public ResponseEntity<Object> addSolution(@Valid @RequestBody AddSolutionsRequest addSolutionsRequest,
 			@PathVariable String code) {
 		return null;
