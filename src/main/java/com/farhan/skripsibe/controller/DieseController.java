@@ -9,6 +9,7 @@ import java.util.Set;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -66,7 +67,7 @@ public class DieseController {
 		return new BaseResponse<Solution>(solutions);
 	}
 
-	@PutMapping("{code}/symptoms/add")
+	@PutMapping("{code}/symptoms")
 	public ResponseEntity<Object> addSymtoms(@Valid @RequestBody AddSymptomsRequest addSymptomsRequest,
 			@PathVariable String code) {
 		List<String> symptomsCode = addSymptomsRequest.getSymptomsCode();
@@ -83,7 +84,7 @@ public class DieseController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);
 	}
 
-	@PutMapping("{code}/solutions/add")
+	@PutMapping("{code}/solutions")
 	public ResponseEntity<Object> addSolution(@Valid @RequestBody AddSolutionsRequest addSolutionsRequest,
 			@PathVariable String code) {
 
@@ -94,5 +95,18 @@ public class DieseController {
 		response.put("status", "created");
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);
+	}
+
+	@DeleteMapping("{code}/symptoms/{symptomsCode}")
+	public ResponseEntity<Object> deletSymptoms(@PathVariable String code, @PathVariable String symptomsCode) {
+
+		Diese diese = dieseRepository.findByCode(code).get();
+		diese.deleteSymptom(symtomRepository.findByCode(symptomsCode).get());
+		dieseRepository.save(diese);
+
+		Map<String, String> response = new HashMap<>();
+		response.put("status", "Deleted");
+
+		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
 }

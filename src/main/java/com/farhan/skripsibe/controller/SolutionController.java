@@ -2,7 +2,6 @@ package com.farhan.skripsibe.controller;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,8 +22,7 @@ public class SolutionController {
 	private final SolutionRepository solutionRepository;
 
 	@DeleteMapping("{id}")
-	public ResponseEntity<Object> getSymtoms(@PathVariable Long id) {
-		// <Symptom> symptoms = dieseService.getSymtoms(code);
+	public ResponseEntity<Object> deleteSolution(@PathVariable Long id) {
 		Solution solution = solutionRepository.findById(id).get();
 		solutionRepository.delete(solution);
 		Map<String, String> response = new HashMap<>();
