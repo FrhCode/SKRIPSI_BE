@@ -1,6 +1,7 @@
 package com.farhan.skripsibe.service;
 
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -68,7 +69,8 @@ public class ConsultationService {
 		ReportJson report = result.getReport();
 		List<SymtomJson> symtomJsonsList = converterService.symptomsTosymtomJsonList(symptoms);
 
-		Consultation consultation = new Consultation(null, invoiceCode, consultationRequest.getName(), LocalDateTime.now(),
+		Consultation consultation = new Consultation(null, invoiceCode, consultationRequest.getName(),
+				LocalDateTime.now(ZoneOffset.ofHours(7)),
 				consultationRequest.getAddress(), consultationRequest.getPhoneNumber(),
 				consultationResults,
 				symtomJsonsList,
