@@ -3,18 +3,27 @@ package com.farhan.skripsibe.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.farhan.skripsibe.exception.BadRequestException;
 import com.farhan.skripsibe.model.Symptom;
+import com.farhan.skripsibe.repository.SymtomRepository;
+import com.farhan.skripsibe.request.CreateSymptomRequest;
 import com.farhan.skripsibe.request.PaginateSymtomRequest;
 import com.farhan.skripsibe.request.SymtomSearchRequest;
 import com.farhan.skripsibe.response.BaseResponse;
 import com.farhan.skripsibe.service.SymptomService;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -22,6 +31,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SymtomController {
 	private final SymptomService symtomService;
+	private final SymtomRepository symtomRepository;
 
 	@GetMapping("all")
 	public BaseResponse<Symptom> findAll() {
@@ -45,5 +55,26 @@ public class SymtomController {
 	@GetMapping
 	public Page<Symptom> paginate(PaginateSymtomRequest symtomPaginateRequest) {
 		return symtomService.paginate(symtomPaginateRequest);
+	}
+
+	@PostMapping
+	public ResponseEntity<Object> createSymtoms(@Valid @RequestBody CreateSymptomRequest createSymptomRequest) {
+		Optional<Symptom> optionalSymptom = symtomRepository.findByCode(createSymptomRequest.getCode());
+		if (optionalSymptom.isPresent()) {
+			Map<String, String> errros = new HashMap<>();
+			errros.put("code", "code telah digunakan");
+			BadRequestException badRequestException = new BadRequestException(errros);
+
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(badRequestException.getResponseBody());
+		}
+		Symptom symptom = new Symptom(null, createSymptomRequest.getCode(), createSymptomRequest.getName(),
+				createSymptomRequest.getDsValue());
+
+		symtomService.create(symptom);
+
+		Map<String, String> response = new HashMap<>();
+		response.put("status", "created");
+
+		return ResponseEntity.status(HttpStatus.CREATED).body(response);
 	}
 }

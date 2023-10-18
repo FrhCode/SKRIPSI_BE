@@ -42,19 +42,6 @@ public class SymptomService {
 		return symtomRepository.count();
 	}
 
-	public boolean checkSymptomsCodeValid(List<String> symptomsCode) {
-		boolean isValid = true;
-
-		for (String symptomCode : symptomsCode) {
-			Optional<Symptom> symptom = symtomRepository.findByCode(symptomCode);
-			if (!symptom.isPresent()) {
-				isValid = false;
-			}
-		}
-
-		return isValid;
-	}
-
 	public List<Symptom> getRandomData(int min, int max) {
 		List<Symptom> symptoms = symtomRepository.findAll();
 		Collections.shuffle(symptoms);
@@ -63,6 +50,10 @@ public class SymptomService {
 		int size = random.nextInt(max - min + 1) + min;
 
 		return symptoms.subList(0, size);
+	}
+
+	public Symptom create(Symptom symptom) {
+		return symtomRepository.save(symptom);
 	}
 
 }

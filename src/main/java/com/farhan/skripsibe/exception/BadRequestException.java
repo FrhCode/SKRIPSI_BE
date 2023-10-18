@@ -5,9 +5,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
-public class BadRequestException {
+@EqualsAndHashCode(callSuper = false)
+public class BadRequestException extends RuntimeException {
 	Map<String, Object> responseBody = new HashMap<>();
 
 	public BadRequestException(Map<String, String> errors) {
