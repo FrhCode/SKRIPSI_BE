@@ -8,7 +8,6 @@ import lombok.*;
 @NoArgsConstructor
 public class RegisterRequest {
 	@NotBlank(message = "Password can not be empty")
-
 	private String username;
 
 	@NotBlank(message = "Password can not be empty")

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +23,7 @@ import com.farhan.skripsibe.repository.SymtomRepository;
 import com.farhan.skripsibe.request.CreateSymptomRequest;
 import com.farhan.skripsibe.request.PaginateSymtomRequest;
 import com.farhan.skripsibe.request.SymtomSearchRequest;
+import com.farhan.skripsibe.request.UpdateSymptomRequest;
 import com.farhan.skripsibe.response.BaseResponse;
 import com.farhan.skripsibe.response.MessageResponse;
 import com.farhan.skripsibe.service.SymptomService;
@@ -64,6 +66,16 @@ public class SymtomController {
 	public ResponseEntity<MessageResponse<String>> delete(@PathVariable String code) {
 		Symptom symptom = symtomRepository.findByCode(code).get();
 		symtomRepository.delete(symptom);
+		return ResponseEntity.status(HttpStatus.OK).body(new MessageResponse<String>("OK"));
+	}
+
+	@PutMapping("{code}")
+	public ResponseEntity<MessageResponse<String>> update(@PathVariable String code,
+			@Valid @RequestBody UpdateSymptomRequest request) {
+		Symptom symptom = symtomRepository.findByCode(code).get();
+		symptom.setDsValue(request.getDsValue());
+		symptom.setName(request.getName());
+		symtomRepository.save(symptom);
 		return ResponseEntity.status(HttpStatus.OK).body(new MessageResponse<String>("OK"));
 	}
 
