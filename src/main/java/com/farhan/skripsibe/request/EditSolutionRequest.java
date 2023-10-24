@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class EditSolutionsRequest {
+public class EditSolutionRequest {
 	@Size(min = 3, message = "Nama setidaknya terdiri dari 3 karakter")
 	private String name;
 

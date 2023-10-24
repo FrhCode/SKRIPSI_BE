@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.farhan.skripsibe.model.Solution;
 import com.farhan.skripsibe.repository.SolutionRepository;
-import com.farhan.skripsibe.request.EditSolutionsRequest;
+import com.farhan.skripsibe.request.EditSolutionRequest;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -37,7 +37,7 @@ public class SolutionController {
 
 	@PutMapping("{id}")
 	public ResponseEntity<Object> editSolution(@PathVariable Long id,
-			@Valid @RequestBody EditSolutionsRequest editSolutionsRequest) {
+			@Valid @RequestBody EditSolutionRequest editSolutionsRequest) {
 
 		Solution solution = solutionRepository.findById(id).get();
 		solution.setName(editSolutionsRequest.getName());

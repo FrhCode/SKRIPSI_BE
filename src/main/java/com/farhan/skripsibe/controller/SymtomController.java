@@ -23,7 +23,7 @@ import com.farhan.skripsibe.repository.SymtomRepository;
 import com.farhan.skripsibe.request.CreateSymptomRequest;
 import com.farhan.skripsibe.request.PaginateSymtomRequest;
 import com.farhan.skripsibe.request.SymtomSearchRequest;
-import com.farhan.skripsibe.request.UpdateSymptomRequest;
+import com.farhan.skripsibe.request.EditSymptomRequest;
 import com.farhan.skripsibe.response.BaseResponse;
 import com.farhan.skripsibe.response.MessageResponse;
 import com.farhan.skripsibe.service.SymptomService;
@@ -71,7 +71,7 @@ public class SymtomController {
 
 	@PutMapping("{code}")
 	public ResponseEntity<MessageResponse<String>> update(@PathVariable String code,
-			@Valid @RequestBody UpdateSymptomRequest request) {
+			@Valid @RequestBody EditSymptomRequest request) {
 		Symptom symptom = symtomRepository.findByCode(code).get();
 		symptom.setDsValue(request.getDsValue());
 		symptom.setName(request.getName());

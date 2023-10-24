@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
-public class UpdateSymptomRequest {
+public class EditSymptomRequest {
 	@NotBlank(message = "name can not be empty")
 	private String name;
 

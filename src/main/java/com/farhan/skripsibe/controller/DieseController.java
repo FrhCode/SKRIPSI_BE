@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,8 +26,11 @@ import com.farhan.skripsibe.repository.SolutionRepository;
 import com.farhan.skripsibe.repository.SymtomRepository;
 import com.farhan.skripsibe.request.AddSolutionsRequest;
 import com.farhan.skripsibe.request.AddSymptomsRequest;
+import com.farhan.skripsibe.request.CreateDieseRequest;
+import com.farhan.skripsibe.request.EditDieseRequest;
 import com.farhan.skripsibe.request.PaginateDieseRequest;
 import com.farhan.skripsibe.response.BaseResponse;
+import com.farhan.skripsibe.response.MessageResponse;
 import com.farhan.skripsibe.service.DieseService;
 
 import jakarta.validation.Valid;
@@ -108,5 +112,31 @@ public class DieseController {
 		response.put("status", "Deleted");
 
 		return ResponseEntity.status(HttpStatus.OK).body(response);
+	}
+
+	@DeleteMapping("{code}")
+	public ResponseEntity<Object> delete(@PathVariable String code) {
+		Diese diese = dieseRepository.findByCode(code).get();
+		dieseRepository.delete(diese);
+		return ResponseEntity.status(HttpStatus.OK).body(new MessageResponse<String>("OK"));
+	}
+
+	@PutMapping("{code}")
+	public ResponseEntity<Object> update(@PathVariable String code, @Valid @RequestBody EditDieseRequest request) {
+		Diese diese = dieseRepository.findByCode(code).get();
+		diese.setName(request.getName());
+		diese.setDescription(request.getDescription());
+		dieseRepository.save(diese);
+		return ResponseEntity.status(HttpStatus.OK).body(new MessageResponse<String>("OK"));
+	}
+
+	@PostMapping
+	public ResponseEntity<Object> save(@Valid @RequestBody CreateDieseRequest request) {
+		Diese diese = new Diese();
+		diese.setCode(request.getCode());
+		diese.setDescription(request.getDescription());
+		diese.setName(request.getName());
+		dieseRepository.save(diese);
+		return ResponseEntity.status(HttpStatus.OK).body(new MessageResponse<String>("OK"));
 	}
 }
