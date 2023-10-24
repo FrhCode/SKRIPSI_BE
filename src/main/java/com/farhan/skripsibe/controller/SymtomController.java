@@ -60,7 +60,7 @@ public class SymtomController {
 		return symtomService.paginate(symtomPaginateRequest);
 	}
 
-	@DeleteMapping("{id}")
+	@DeleteMapping("{code}")
 	public ResponseEntity<MessageResponse<String>> delete(@PathVariable String code) {
 		Symptom symptom = symtomRepository.findByCode(code).get();
 		symtomRepository.delete(symptom);
