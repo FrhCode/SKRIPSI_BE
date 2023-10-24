@@ -8,7 +8,9 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +23,7 @@ import com.farhan.skripsibe.request.CreateSymptomRequest;
 import com.farhan.skripsibe.request.PaginateSymtomRequest;
 import com.farhan.skripsibe.request.SymtomSearchRequest;
 import com.farhan.skripsibe.response.BaseResponse;
+import com.farhan.skripsibe.response.MessageResponse;
 import com.farhan.skripsibe.service.SymptomService;
 
 import jakarta.validation.Valid;
@@ -55,6 +58,13 @@ public class SymtomController {
 	@GetMapping
 	public Page<Symptom> paginate(PaginateSymtomRequest symtomPaginateRequest) {
 		return symtomService.paginate(symtomPaginateRequest);
+	}
+
+	@DeleteMapping("{id}")
+	public ResponseEntity<MessageResponse<String>> delete(@PathVariable String code) {
+		Symptom symptom = symtomRepository.findByCode(code).get();
+		symtomRepository.delete(symptom);
+		return ResponseEntity.status(HttpStatus.OK).body(new MessageResponse<String>("OK"));
 	}
 
 	@PostMapping
