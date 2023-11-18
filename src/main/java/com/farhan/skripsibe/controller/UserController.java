@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.farhan.skripsibe.model.Diese;
 import com.farhan.skripsibe.model.User;
 import com.farhan.skripsibe.repository.UserRepository;
+import com.farhan.skripsibe.request.ChangePasswordRequest;
 import com.farhan.skripsibe.request.CreateUserRequest;
 import com.farhan.skripsibe.request.EditUserRequest;
 import com.farhan.skripsibe.request.PaginateDieseRequest;
@@ -84,6 +85,20 @@ public class UserController {
 		User user = userRepository.findById(id).get();
 		user.setName(editUserRequest.getName());
 		user.setPhoneNumber(editUserRequest.getPhoneNumber());
+
+		userRepository.save(user);
+		Map<String, String> response = new HashMap<>();
+		response.put("status", "updated");
+
+		return ResponseEntity.status(HttpStatus.OK).body(response);
+	}
+
+	// create route for update user password
+	@PutMapping("{id}/password")
+	public ResponseEntity<Object> changePassword(@PathVariable Long id,
+			@Valid @RequestBody ChangePasswordRequest changePasswordRequest) {
+		User user = userRepository.findById(id).get();
+		user.setPassword(passwordEncoder.encode(changePasswordRequest.getPassword()));
 
 		userRepository.save(user);
 		Map<String, String> response = new HashMap<>();
