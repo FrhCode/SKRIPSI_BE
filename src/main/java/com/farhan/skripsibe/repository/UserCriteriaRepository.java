@@ -10,7 +10,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
-import com.farhan.skripsibe.model.Consultation;
 import com.farhan.skripsibe.model.User;
 import com.farhan.skripsibe.request.PaginateUserRequest;
 
