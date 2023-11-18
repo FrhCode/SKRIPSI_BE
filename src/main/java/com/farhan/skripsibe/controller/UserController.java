@@ -84,7 +84,6 @@ public class UserController {
 		User user = userRepository.findById(id).get();
 		user.setName(editUserRequest.getName());
 		user.setPhoneNumber(editUserRequest.getPhoneNumber());
-		user.setPassword(passwordEncoder.encode(editUserRequest.getPassword()));
 
 		userRepository.save(user);
 		Map<String, String> response = new HashMap<>();

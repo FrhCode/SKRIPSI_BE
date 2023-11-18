@@ -10,7 +10,4 @@ public class EditUserRequest {
 
 	@NotBlank(message = "description can not be empty")
 	private String phoneNumber;
-
-	@NotBlank(message = "password can not be empty")
-	private String password;
 }
